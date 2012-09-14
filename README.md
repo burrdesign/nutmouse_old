@@ -10,5 +10,4 @@ NutMouse ist ein durch die Firma BurrDesign in Persona mich (Julian Burr) entwor
 
 und weitere Funktionen.
 
-(c)2012 - Julian Burr - BurrDesign
-Stand: 14.09.2012
+(c)2012 - Julian Burr - BurrDesign - Stand: 14.09.2012
