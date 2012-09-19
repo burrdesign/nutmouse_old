@@ -3,7 +3,7 @@
 	/************************************************************************
 	Hauptklasse des BurrDesign für das Laden und Ausgeben der Seiteninhalte
 	Version 0.1
-	Copyright by Julian Burr - 30.07.2012
+	Copyright by Julian Burr - 19.09.2012
 	************************************************************************/
 	
 	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/Template.php");
@@ -22,7 +22,8 @@
 			
 			//Versuchen den Inhalt unter den Seiteninhalten zu finden
 			$pg = $this->page_url;
-			$this->page_object['pagedata'] = sqlresult("SELECT * FROM bd_main_contents WHERE contentURL = '$pg' LIMIT 1");
+			$page_query = new SQLManager();
+			$this->page_object['pagedata'] = $page_query->get("bd_main_contents","contentURL",$pg);
 			
 			if($this->page_object['pagedata']['contentKey']){
 				$success = true;
@@ -42,7 +43,8 @@
 			if($news_basicurl && strpos($page,$news_basicurl) !== false && strpos($page,$news_basicurl) == 0){
 				//News-Basisurl steht am Anfang => News laden
 				$pg = str_replace($news_basicurl,"",$page);
-				$this->page_object['newsdata'] = sqlresult("SELECT * FROM bd_main_news WHERE newsUrl = '$pg' LIMIT 1");
+				$news_query = new SQLManager();
+				$this->page_object['newsdata'] = $news_query->get("bd_main_news","newsUrl",$pg);
 				
 				if($this->page_object['newsdata']['newsKey']){
 					if(!$this->page_object['newsdata']['newsTemplate']){

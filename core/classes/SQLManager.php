@@ -142,6 +142,14 @@
 			$this->execute();
 		}
 		
+		public function get($table,$keyfield,$keyvalue){
+			//Laden eines Datenobjekts anhand eines übergebenen Schlüssels
+			$result = array();
+			$this->setQuery("SELECT * FROM ".mysql_real_escape_string($table)." WHERE ".mysql_real_escape_string($keyfield)." = '".mysql_real_escape_string($keyvalue)."' LIMIT 1");
+			$result = $this->result();
+			return $result;
+		}
+		
 		public function getDataObject($object){
 			//Datenobjekt für den Tabellenmanager aufbereiten und validieren
 			if(!$this->q_table){

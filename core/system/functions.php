@@ -6,6 +6,8 @@
 	Copyright by Julian Burr - 12.07.2012
 	***********************************************/
 	
+	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/SQLManager.php");
+	
 	function sqlquery($befehl,$befehl_typ="select"){
 		//Allgemeine SQL-Abfrage
 		$mysqlhost = "localhost";

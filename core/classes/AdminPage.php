@@ -3,7 +3,7 @@
 	/************************************************************************
 	Hauptklasse des BurrDesign für das Laden und Ausgeben der Adminmodule
 	Version 0.1
-	Copyright by Julian Burr - 30.07.2012
+	Copyright by Julian Burr - 19.09.2012
 	************************************************************************/
 	
 	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/Template.php");
@@ -21,7 +21,7 @@
 		}
 		
 		public function loadPageModule(){
-			$access = false;
+			$success = false;
 			$module = "";
 			
 			//Modul aus der Datenbank laden
@@ -39,9 +39,8 @@
 			}
 			
 			//Aus der Moduldatenbanktabelle laden
-			$this->page_object['pagedata'] = sqlresult("
-				SELECT * FROM bd_admin_modules WHERE modURL = '".$this->page_url."' 
-				LIMIT 1");
+			$page_query = new SQLManager();
+			$this->page_object['pagedata'] = $page_query->get("bd_admin_modules","modURL",$this->page_url);
 			
 			if($this->page_object['pagedata']['modKey']){
 				//Modul gefunden
@@ -54,10 +53,10 @@
 				
 				$_SESSION['BURRDESIGN']['ADMIN']['current_page'] = $this->initPageInfo();
 				
-				$access = true;
+				$success = true;
 			}
 			
-			return $access;
+			return $success;
 		}
 		
 		public function printAdminPage(){
@@ -76,16 +75,10 @@
 		
 		private function initPageInfo(){
 			//Seiteninformationen initialisieren
-			$info = array();
-			$info['menu_info'] = sqlresult("
-					SELECT * FROM bd_admin_menu
-					WHERE adminMenuKey = '".(int)$this->page_object['pagedata']['modMenu']."'
-					LIMIT 1");
+			$info_query = new SQLManager();
+			$info['menu_info'] = $info_query->get("bd_admin_menu","adminMenuKey",$this->page_object['pagedata']['modMenu']);
 			if($info['menu_info']['adminMenuParent']){
-			   	$info['mainmenu_info'] = sqlresult("
-					SELECT * FROM bd_admin_menu
-					WHERE adminMenuKey = '".(int)$info['menu_info']['adminMenuParent']."'
-					LIMIT 1");
+				$info['mainmenu_info'] = $info_query->get("bd_admin_menu","adminMenuKey",$info['menu_info']['adminMenuParent']);
 			} else {
 				$info['mainmenu_info'] = $info['menu_info'];
 			}
