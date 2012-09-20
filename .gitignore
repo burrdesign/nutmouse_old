@@ -1,0 +1,8 @@
+#custom dirs
+templates/burrdesign/*
+
+#image files (zumindest fürs erste)
+*.png
+*.gif
+*.jpg
+*.jpeg
