@@ -5,3 +5,4 @@
 
 <!-- Javascripte -->
 <script type="text/javascript" src="/templates/standard/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/templates/standard/admin/js/ace.min.js"></script>
