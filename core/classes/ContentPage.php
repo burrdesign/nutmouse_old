@@ -23,7 +23,14 @@
 			//Versuchen den Inhalt unter den Seiteninhalten zu finden
 			$pg = $this->page_url;
 			$page_query = new SQLManager();
-			$this->page_object['pagedata'] = $page_query->get("bd_main_contents","contentURL",$pg);
+			$page_query->setQuery("
+				SELECT * FROM bd_main_content
+				JOIN bd_main_content_version ON (contentKey = versionContentKey)
+				WHERE contentURL = '{{page}}' AND versionActive = 1
+				LIMIT 1
+				");
+			$page_query->bindParam("{{page}}",$pg);
+			$this->page_object['pagedata'] = $page_query->result();
 			
 			if($this->page_object['pagedata']['contentKey']){
 				$success = true;
@@ -59,8 +66,8 @@
 			
 		
 		public function printContentPage(){
-			$tpl = new Template($this->page_object['pagedata']['contentTemplate']);
-			$tpl->parseTemplateContent($this->page_object['pagedata']['contentText']);
+			$tpl = new Template($this->page_object['pagedata']['versionTemplate']);
+			$tpl->parseTemplateContent($this->page_object['pagedata']['versionText']);
 			$tpl->printTemplateContent();
 		}
 		

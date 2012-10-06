@@ -23,11 +23,16 @@
 		public function initList($maindir){
 			//Verzeichnisse und Dateien aus aktuellem Verzeichnis in Liste schreiben
 			$sql = new SQLManager();
-			$where = "";
+			$where = "WHERE TRUE"; /*versionActive = 1*/
 			if($maindir){
-				$where .= "WHERE contentURL LIKE '{{maindir}}%'";
+				$where .= " AND contentURL LIKE '{{maindir}}%'";
 			}
-			$sql->setQuery("SELECT * FROM bd_main_contents $where");
+			$sql->setQuery("
+				SELECT * FROM bd_main_content 
+				JOIN bd_main_content_version ON (contentKey = versionContentKey)
+				$where
+				ORDER BY contentURL, versionNumber DESC
+				");
 			$sql->bindParam("{{maindir}}",$maindir);
 			$result = $sql->execute();
 			
@@ -67,16 +72,17 @@
 		}
 		
 		public function addFile($title,$info,$type="file",$filetype=""){
-			$this->list_files[$title."_file"]['title'] = $title;
-			$this->list_files[$title."_file"]['info'] = $info;
-			$this->list_files[$title."_file"]['info']['url'] = $info['contentURL'];
-			$this->list_files[$title."_file"]['info']['url_abs'] = $_SESSION['BURRDESIGN']['CONFIG']['HOST']."/".$info['contentURL'];
-			$this->list_files[$title."_file"]['info']['type'] = $type;
+			$nmb = count($this->list_files);
+			$this->list_files[$nmb]['title'] = $title;
+			$this->list_files[$nmb]['info'] = $info;
+			$this->list_files[$nmb]['info']['url'] = $info['contentURL'];
+			$this->list_files[$nmb]['info']['url_abs'] = $_SESSION['BURRDESIGN']['CONFIG']['HOST']."/".$info['contentURL'];
+			$this->list_files[$nmb]['info']['type'] = $type;
 			if($filetype){
-				$this->list_files[$title."_file"]['info']['filetype'] = $filetype;
+				$this->list_files[$nmb]['info']['filetype'] = $filetype;
 			} else {
 				$filetype = split("\.",$title);
-				$this->list_files[$title."_file"]['info']['filetype'] = $filetype[count($filetype)-1];
+				$this->list_files[$nmb]['info']['filetype'] = $filetype[count($filetype)-1];
 			}
 		}
 		
@@ -131,7 +137,7 @@
 		
 		public function printList(){
 			echo "<div class=\"wrap_contentlist\">\n";
-			echo "<table><tr><th class=\"icon\"></th><th>Name</th><th>Zuletzt ge&auml;ndert</th><th>Version</th><th>Notiz</th></tr>";
+			echo "<table><tr><th class=\"icon\"></th><th>Name</th><th>Zuletzt ge&auml;ndert</th><th class=\"version\">Version</th><th>Notiz</th></tr>";
 			
 			//Verzeichnisse zuerst ausgeben
 			foreach($this->list_dirs as $dir){
@@ -143,7 +149,11 @@
 				if(!$file['title']){
 					$file['title'] = "<span class=\"notitle\">index</span></span>";
 				}
-				echo "<tr><td class=\"icon\"><span class=\"".$file['info']['type']." file_".$file['info']['filetype']."\"></span></td><td><a href=\"?file=".$file['info']['contentKey']."\" title=\"".$file['info']['url']."\"><span class=\"filename\">".$file['title']."</span></a></td><td>".$file['info']['contentLastChanged']."</td><td>".$file['info']['contentVersion']."</td><td></td></tr>\n";
+				$trclass = "";
+				if($file['info']['versionActive'] != 1){
+					$trclass = "inactive";
+				}
+				echo "<tr class=\"$trclass\"><td class=\"icon\"><span class=\"".$file['info']['type']." file_".$file['info']['filetype']."\"></span></td><td><a href=\"?file=".$file['info']['contentKey']."&version=".$file['info']['versionNumber']."\" title=\"".$file['info']['url']."\"><span class=\"filename\">".$file['title']."</span></a></td><td>".$file['info']['versionLastChanged']."</td><td class=\"version\">".$file['info']['versionNumber']."</td><td>".$file['info']['versionNote']."</td></tr>\n";
 			}
 
 			echo "</table>\n";

@@ -13,6 +13,7 @@
 	include_once($_SERVER['DOCUMENT_ROOT']."core/classes/admin/Formular.php");
 
 	$key = $_GET['file'];
+	$version = $_GET['version'];
 	
 	$content = new Content($key);
 	
@@ -31,14 +32,13 @@
 	} elseif($_POST['inhalte_detail_save_new_version']){
 		//Als neue Version speichern
 		$content->saveContentNewVersion($_POST);
-		$key = $content->getLastInsertID();
 	} elseif($_POST['inhalte_detail_delete']){
 		//Wirklich löschen? Bestätigungsbilschrim anzeigen
-		$content->printDeleteAcception();
+		$content->printDeleteAcception($_POST);
 		return;
 	} elseif($_POST['inhalte_detail_deleteaccepted']){
 		//Löschen
-		$done = $content->deleteContent();
+		$done = $content->deleteContent($_POST);
 		
 		if($done){
 			//und Listenansich einblenden, wenn Löschung erfolgreich war
@@ -54,7 +54,7 @@
 	************************************************************************/
 	
 	//Seiteninhalt laden
-	$content_array = $content->loadContent($key);
+	$content_array = $content->loadContent($key,$version);
 	
 	//URL-Pfad ausgeben
 	$content->printURLPath();
@@ -73,12 +73,14 @@
 	$formular->printFormStart("inhalte_detail","?file=".$key,"post");
 	
 	$formular->printInputHidden("contentKey");
+	$formular->printInputHidden("versionKey");
+	$formular->printInputHidden("versionNumber");
 	
 	$urlpath = "";
 	if($content_array['contentKey'] == "") $urlpath = $_POST['addnew_from'];
 	$formular->printInputURL("contentURL","URL-Pfad",$urlpath);
 	$formular->printInputText("contentTitle","Seitentitel","","","","width:480px;");
-	$formular->printInputSourceCode("contentText","Inhalt","","","","width:800px;");
+	$formular->printInputSourceCode("versionText","Inhalt","","","","width:600px;",$content);
 	
 	if($content_array['contentKey']){
 		//wenn vorhandener Inhalt bearbeitet wird
