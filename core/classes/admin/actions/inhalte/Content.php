@@ -2,8 +2,8 @@
 
 	/*****************************************************************************
 	Hauptklasse zur Verwaltung von Seiteninhalten (Contents) und deren Actions
-	Version 1.0
-	Copyright by Julian Burr - 03.08.2012
+	Version 0.1
+	Copyright by Julian Burr - 06.10.2012
 	*****************************************************************************/
 
 	class Content {
