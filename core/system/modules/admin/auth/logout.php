@@ -2,6 +2,7 @@
 
 	//Login-Session löschen
 	unset($_SESSION['BURRDESIGN']['ADMIN']);
+	unset($_SESSION['BURRDESIGN']['CONFIG']);
 	
 	echo "<div class=\"okmsg\">Sie wurden erfolgreich abgemeldet!</div>";
 	
