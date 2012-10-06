@@ -53,6 +53,7 @@
 			
 			$array['contentTitle'] = prepareTextSQL($array['contentTitle']);
 			$array['versionText'] = prepareTextSQL($array['versionText']);
+			$array['versionNote'] = prepareTextSQL($array['versionNote']);
 			$array['versionLastChanged'] = date("Y-m-d H:i:s",time());
 			
 			$sql = new SQLManager();
@@ -83,6 +84,7 @@
 			$array['versionContentKey'] = $this->content_key;
 			$array['contentTitle'] = prepareTextSQL($array['contentTitle']);
 			$array['versionText'] = prepareTextSQL($array['versionText']);
+			$array['versionNote'] = prepareTextSQL($array['versionNote']);
 			$array['versionNumber'] = (int)$oldmaxversion['versionNumber'] + 1;
 			$array['versionLastChanged'] = date("Y-m-d H:i:s",time());
 			$array['versionCreated'] = date("Y-m-d H:i:s",time());
@@ -112,6 +114,7 @@
 			
 			$array['versionContentKey'] = $this->content_last_insert_id;
 			$array['versionText'] = prepareTextSQL($array['versionText']);
+			$array['versionNote'] = prepareTextSQL($array['versionNote']);
 			$array['versionLastChanged'] = date("Y-m-d H:i:s",time());
 			$array['versionCreated'] = date("Y-m-d H:i:s",time());
 			$array['versionNumber'] = 1;
@@ -242,12 +245,13 @@
 			if($info['contentKey']){
 				echo "<div class=\"lastchanged\"><span class=\"noname\">Zuletzt ge&auml;ndert: ".$info['versionLastChanged']."</span></div>";
 				//echo "<div class=\"lastchangedby\">".$info['versionLastChangedBy']."</div>";
+				echo "<div class=\"note\"><a href=\"#note\" title=\"Notiz f&uuml;r diese Version bearbeiten\">&nbsp;</a></div>";
 			}
 			$checked = "";
 			if($info['versionActive'] != 0 || !$info['contentKey']){
 				$checked = "checked=\"checked\"";
 			}
-			echo "<div class=\"versionactive\"><input type=\"hidden\" name=\"versionActive\" value=\"0\"><input type=\"checkbox\" name=\"versionActive\" value=\"1\" $checked></div>";
+			echo "<div class=\"versionactive\"><input type=\"hidden\" name=\"versionActive\" value=\"0\"><input type=\"checkbox\" name=\"versionActive\" value=\"1\" title=\"Diese Version aktivieren/deaktivieren\" $checked></div>";
 			if($info['contentKey']){
 				$sql = new SQLManager();
 				$sql->setQuery("
@@ -257,17 +261,20 @@
 					");
 				$sql->bindParam("{{key}}",$info['contentKey'],"int");
 				$versions = $sql->execute();
-				echo "<div class=\"versions\"><span class=\"noname\">Version:</span>";
+				echo "<div class=\"versions\"><span class=\"noname\">Version:</span> ";
+				echo "<select onchange=\"window.location=('?file=".$info['contentKey']."&version=' + this.value)\">";
 				while($version = mysql_fetch_array($versions)){
+					$selected = "";
 					if($version['versionNumber'] == $info['versionNumber']){
-						echo " <span class=\"current_version version_".$version['versionNumber']."\">".$version['versionNumber']."</span>";
-					} else {
-						echo " <a class=\"version version_".$version['versionNumber']."\" href=\"?file=".$info['contentKey']."&version=".$version['versionNumber']."\">".$version['versionNumber']."</a>";
+						$selected = "selected=\"selected\"";
 					}
+					echo " <option value=\"".$version['versionNumber']."\" $selected>".$version['versionNumber']."</option>";
 				}
+				echo "</select>";
 				echo "</div>";
 			}
 			echo "</div></div>\n";
+			echo "<div class=\"wrap_sourcenote\"><textarea name=\"versionNote\">".$info['versionNote']."</textarea></div>";
 		}
 		
 	}

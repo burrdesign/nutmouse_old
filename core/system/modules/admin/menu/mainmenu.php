@@ -25,7 +25,7 @@
 	$mainapps_res = $sql->execute();
 ?>
 <ul>
-	<!-- Nutmouse 1.0 (c) Burr Design - Julian Burr -->
+	<!-- Nutmouse 0.1 (c) Burr Design - Julian Burr -->
 	<li id="mainnav_li_bdlogo"><a href="/admin/info" class="lightbox" rel="version_info">BurrDesign</a></li>
 	<?php	
 		//Hauptmenü ausgeben

@@ -65,7 +65,7 @@
 		public function printInputURL($name,$label,$value="",$class="",$disabled="",$style="",$mainurl=""){
 			if(!$value) $value = $this->form_object[$name];
 			if(!$mainurl) $mainurl = $_SESSION['BURRDESIGN']['CONFIG']['HOST']."/";			
-			echo "\n<div class=\"wrap_input\">\n<div class=\"label\">$label</div>\n<div class=\"input input_url\"><span class=\"mainurl\">$mainurl</span><input type=\"text\" class=\"text $class\" name=\"$name\" value=\"$value\" style=\"$style\" $disabled>\n</div>\n</div>\n";
+			echo "\n<div class=\"wrap_input\">\n<div class=\"label\">$label</div>\n<div class=\"input input_url\"><span class=\"mainurl\">$mainurl</span><input type=\"text\" class=\"text $class\" name=\"$name\" value=\"$value\" style=\"$style\" $disabled><a class=\"hyperlink\" href=\"http://".$mainurl.$value."\" target=\"_blank\" title=\"Seite in neuen Fenster &ouml;ffnen\">&nbsp;</a>\n</div>\n</div>\n";
 		}
 		
 		public function printInputSourceCode($name,$label,$value="",$class="",$disabled="",$style="",$content=""){

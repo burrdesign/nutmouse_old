@@ -153,7 +153,7 @@
 				if($file['info']['versionActive'] != 1){
 					$trclass = "inactive";
 				}
-				echo "<tr class=\"$trclass\"><td class=\"icon\"><span class=\"".$file['info']['type']." file_".$file['info']['filetype']."\"></span></td><td><a href=\"?file=".$file['info']['contentKey']."&version=".$file['info']['versionNumber']."\" title=\"".$file['info']['url']."\"><span class=\"filename\">".$file['title']."</span></a></td><td>".$file['info']['versionLastChanged']."</td><td class=\"version\">".$file['info']['versionNumber']."</td><td>".$file['info']['versionNote']."</td></tr>\n";
+				echo "<tr class=\"$trclass\"><td class=\"icon\"><span class=\"".$file['info']['type']." file_".$file['info']['filetype']."\"></span></td><td><a href=\"?file=".$file['info']['contentKey']."&version=".$file['info']['versionNumber']."\" title=\"".$file['info']['contentTitle']."\"><span class=\"filename\">".$file['title']."</span></a></td><td>".$file['info']['versionLastChanged']."</td><td class=\"version\">".$file['info']['versionNumber']."</td><td>".$file['info']['versionNote']."</td></tr>\n";
 			}
 
 			echo "</table>\n";

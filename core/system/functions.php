@@ -1,13 +1,14 @@
 <?php
 
 	/***********************************************
-	PHP-Hilfsfunktionen
+	PHP-Hilfsfunktionen & -klassen
 	Version 0.1
 	Copyright by Julian Burr - 12.07.2012
 	***********************************************/
 	
 	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/SQLManager.php");
 	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/Log.php");
+	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/format/Date.php");
 	
 	function get_include($module_path){
 		$output = "";

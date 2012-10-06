@@ -60,7 +60,8 @@
 	$content->printURLPath();
 	
 	//Titel und ggf. Kurzbeschreibung der Adminmaske ausgeben
-	echo "<h3>Seiteninhalt bearbeiten</h3>\n\n";
+	if(!$content_array['contentKey']) echo "<h3>Seiteninhalt anlegen</h3>\n\n";
+	else echo "<h3>Seiteninhalt bearbeiten</h3>\n\n";
 	
 	//Globale Fehler- und Erfolgsmeldungen laden und ggf. ausgeben
 	$messages = $content->getMessages();
@@ -81,6 +82,8 @@
 	$formular->printInputURL("contentURL","URL-Pfad",$urlpath);
 	$formular->printInputText("contentTitle","Seitentitel","","","","width:480px;");
 	$formular->printInputSourceCode("versionText","Inhalt","","","","width:600px;",$content);
+	
+	$formular->printInputHidden("versionTemplate","index.tpl");
 	
 	if($content_array['contentKey']){
 		//wenn vorhandener Inhalt bearbeitet wird
