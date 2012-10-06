@@ -19,9 +19,17 @@
 		
 		public function newSession(){
 			//Session-Initialisierung
+			$_SESSION['BURRDESIGN']['SESSION'] = session_id();
 			$_SESSION['BURRDESIGN']['PAGE'] = $page;
-			$_SESSION['BURRDESIGN']['CONFIG'] = loadconfig();
+			$_SESSION['BURRDESIGN']['CONFIG'] = $this->loadconfig();
 			$_SESSION['BURRDESIGN']['CONFIG']['isset'] = 1;
+		}
+		
+		public function loadConfig(){
+			$config['HOST'] = "dev.burrdesign.de";
+			$config['LayoutClass'] = "burrdesign";
+			$config['LOG'] = true;
+			return $config;
 		}
 		
 	}
