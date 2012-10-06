@@ -40,7 +40,7 @@
 			
 			//Aus der Moduldatenbanktabelle laden
 			$page_query = new SQLManager();
-			$this->page_object['pagedata'] = $page_query->get("bd_admin_modules","modURL",$this->page_url);
+			$this->page_object['pagedata'] = $page_query->get("bd_admin_module","modURL",$this->page_url);
 			
 			if($this->page_object['pagedata']['modKey']){
 				//Modul gefunden

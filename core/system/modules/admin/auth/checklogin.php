@@ -9,7 +9,7 @@
 	if($_POST['adminlogin_submit']){
 		//Loginformular wurde abgesendet => verarbeiten + ggf. Anmeldung initialisieren
 		$admin_user = sqlresult("
-			SELECT * FROM bd_admin_users 
+			SELECT * FROM bd_admin_user
 			WHERE adminUserName = '".$_POST['adminlogin_user']."' AND adminUserPassword = '".md5($_POST['adminlogin_password'])."'
 			LIMIT 1");
 		
