@@ -2,22 +2,27 @@
 
 	/*************************************************************
 	Modul zum ausgeben des Admin-Hauptmenüs dynamisch aus der DB
-	Version 1.0
+	Version 0.1
 	Copyright by Julian Burr - 31.07.2012
 	*************************************************************/
 
+	$sql = new SQLManager();
+	
 	//Menüeinträge laden
-	$mainmenu_res = sqlquery("
+	$sql->setQuery("
 		SELECT * FROM bd_admin_menu
 		WHERE adminMenuActive = 1 AND (adminMenuParent IS NULL OR adminMenuParent = '') 
 			AND (adminMenuType IS NULL OR adminMenuType = '') 
 		ORDER BY adminMenuPos");
+	$mainmenu_res = $sql->execute();
+	
 	//Apps laden
-	$mainapps_res = sqlquery("
+	$sql->setQuery("
 		SELECT * FROM bd_admin_menu
 		WHERE adminMenuActive = 1 AND (adminMenuParent IS NULL OR adminMenuParent = '') 
 			AND adminMenuType = 'app' 
 		ORDER BY adminMenuPos");
+	$mainapps_res = $sql->execute();
 ?>
 <ul>
 	<!-- Nutmouse 1.0 (c) Burr Design - Julian Burr -->

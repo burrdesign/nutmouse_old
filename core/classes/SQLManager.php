@@ -81,12 +81,18 @@
 			$query .= ") VALUES (";
 			$sep = "";
 			foreach($insert as $key => $value){
+				$value = stripslashes($value);
 				$query .= "${sep} '".mysql_real_escape_string($value)."'";
 				$sep = ",";
 			}
 			$query .= ")";
 			$this->setQuery($query);
 			$this->execute();
+		}
+		
+		public function getLastInsertID(){
+			$key = mysql_insert_id();
+			return $key;
 		}
 		
 		public function update($table,$object){
@@ -105,6 +111,7 @@
 			$query = "UPDATE ".$this->q_table." SET ";
 			$sep = "";
 			foreach($update as $key => $value){
+				$value = stripslashes($value);
 				$query .= "${sep} ".mysql_real_escape_string($key)."='".mysql_real_escape_string($value)."'";
 				$sep = ",";
 			}
@@ -134,6 +141,7 @@
 			$query = "DELETE FROM ".$this->q_table." WHERE ";
 			$sep = "";
 			foreach($this->table_info['primarykey'] as $key){
+				$delete[$key] = stripslashes($delete[$key]);
 				$query .= "${sep} ${key}='".mysql_real_escape_string($delete[$key])."'";
 				$sep = "AND";
 			}
@@ -145,6 +153,7 @@
 		public function get($table,$keyfield,$keyvalue){
 			//Laden eines Datenobjekts anhand eines übergebenen Schlüssels
 			$result = array();
+			$keyvalue = stripslashes($keyvalue);
 			$this->setQuery("SELECT * FROM ".mysql_real_escape_string($table)." WHERE ".mysql_real_escape_string($keyfield)." = '".mysql_real_escape_string($keyvalue)."' LIMIT 1");
 			$result = $this->result();
 			return $result;

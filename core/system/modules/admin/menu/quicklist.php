@@ -1,9 +1,18 @@
 <?php
-	//Quicklist laden
-	$quicklist_res = sqlquery("
+
+	/****************************************************************
+	Modul zum ausgeben der userspez. Quicklist in der Administration
+	Version 0.1
+	Copyright by Julian Burr - 31.07.2012
+	****************************************************************/
+	
+	$sql = new SQLManager();
+	$sql->setQuery("
 		SELECT * FROM bd_admin_quicklist
-		WHERE qlistAdminUser = '".$_SESSION['BURRDESIGN']['ADMIN']['user']."' 
+		WHERE qlistAdminUser = '{{user}}' 
 		ORDER BY qlistAddedDate");
+	$sql->bindParam("{{user}}",$_SESSION['BURRDESIGN']['ADMIN']['user']);
+	$quicklist_res = $sql->execute();
 ?>
 <div class="box_inner">
 

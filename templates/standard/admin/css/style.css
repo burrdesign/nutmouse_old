@@ -3,7 +3,11 @@
 
 body { margin:0; padding:0; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; color:#222; font-size:13px; line-height:1.4; }
 
-.clear { clear:both !important; float:none !important; }
+a { color:#590; text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+
+.clear { clear:both !important; float:none; }
 
 .box_inner { padding:20px; float:left; }
 
@@ -66,10 +70,12 @@ body.authLogin .okmsg p { margin:3px 0; }
 .wrap_content .navleft .subnav .desc h3 { font-size:180%; margin:0 0 12px 0; }
 .wrap_content .navleft .quicklist { color:#aaa; border-top:1px solid #bbb; }
 
-.content h3 { margin:5px 0 10px 5px; font-size:180%; font-weight:normal; }
+.content h3 { margin:20px 0 10px 5px; font-size:180%; font-weight:normal; float:left; }
+
+.adminmaske { width:600px; }
 
 .wrap_form,
-.wrap_input { width:500px; }
+.wrap_input { width:100%; }
 .wrap_input { clear:both; }
 .wrap_form input,
 .wrap_form select,
@@ -77,6 +83,8 @@ body.authLogin .okmsg p { margin:3px 0; }
 .wrap_form input.text, 
 .wrap_form select, 
 .wrap_form textarea { width:350px; float:left; padding:7px; border:1px solid #bbb; color:#555; margin:0 0 5px 0; }
+.wrap_form .input_url .mainurl { background: none #eee; border:1px solid #bbb; border-right:0 none; float: left; padding: 7px; }
+.wrap_form div.sourcecode { width:100%; height:500px; position:relative; margin:0 0 5px 0; border:1px solid #bbb; }
 .wrap_form label { font-size:10px; text-transform:uppercase; color:#888; display:block; float:left; width:100px; padding:10px 5px; }
 .wrap_form input.submit { display:block; float:left; padding:7px 10px; border:0 none; background:none #ddd; color:#555; font-size:11px; text-transform:uppercase; margin:0 5px 5px 0; cursor:pointer; border:1px solid #bbb; }
 .wrap_form input.submit:hover { background:none #9c0; color:#fff; border:1px solid #590; }
@@ -87,32 +95,31 @@ body.authLogin .okmsg p { margin:3px 0; }
 .wrap_form .okmsg,
 .wrap_form .errormsg { width:100%; float:left; padding:0 0 12px 0; font-weight:bold; }
 
-.wrap_filelist a.file,
-.wrap_filelist a.dir { display:block; float:left; width:80px; height:80px; background-color:#fff; border:1px solid #fff; text-align:center; position:relative; margin:0 5px 5px 0; padding:10px; font-size:9px; color:#bbb; text-decoration:none; }
-.wrap_filelist a.file:hover,
-.wrap_filelist a.dir:hover { background-color:#eee; border:1px solid #bbb; }
-.wrap_filelist a.file { background:url(../img/backgrounds/icons/datei_gross.png) #fff no-repeat center 10px; }
-.wrap_filelist a.dir { background:url(../img/backgrounds/icons/verzeichnis_gross.png) #fff no-repeat center 10px; }
-.wrap_filelist a.file:hover { background:url(../img/backgrounds/icons/dateion_gross.png) #f5f5f5 no-repeat center 10px; }
-.wrap_filelist a.dir:hover { background:url(../img/backgrounds/icons/verzeichnison_gross.png) #f5f5f5 no-repeat center 10px; }
-.wrap_filelist a.file span,
-.wrap_filelist a.dir span { display:block; width:100%; float:left; text-align:center; }
-.wrap_filelist a.file span.filename,
-.wrap_filelist a.dir span.dirname { margin-top:45px; }
+/* ACE-Editor */
+.ace-tm .ace_gutter { border-right:1px solid #bbb; background:none #f5f5f5; }
 
-.wrap_filelist_settings { width:100%; float:left; padding:0 0 10px 0; }
-.wrap_filelist_settings .setting_url span.label,
-.wrap_filelist_settings .setting_url span.current,
-.wrap_filelist_settings .setting_url a { border:1px solid #bbb; display:block; float:left; padding:7px; margin:0 5px 0 0; text-decoration:none; font-size:11px; text-transform:uppercase; }
-.wrap_filelist_settings .setting_url span.label { background:none #d5d5d5; color:#333; }
-.wrap_filelist_settings .setting_url span.current { background:none #eee; color:#333; }
-.wrap_filelist_settings .setting_url a { background:none #eee; color:#555; }
-.wrap_filelist_settings .setting_url a:hover { background:none #9c0; color:#fff; border:1px solid #590; }
+.wrap_contentlist { float:left; margin:10px 0; }
+.wrap_contentlist table { border-collapse:collapse; }
+.wrap_contentlist table tr { border:1px solid #bbb; }
+.wrap_contentlist table tr th { text-align:left; padding:7px 20px 7px 4px; background:none #d5d5d5; font-weight:normal; text-transform:uppercase; font-size:11px; }
+.wrap_contentlist table tr td { vertical-align:middle; padding:4px 20px 4px 4px; background:none #f5f5f5; }
+.wrap_contentlist table tr td.icon { width:30px; padding:4px; }
 
+.wrap_contentlist table tr td.icon span { display:block; width:100%; height:20px; }
+.wrap_contentlist table tr td.icon span.dir { background:url(../img/backgrounds/icons/datei_klein.png) transparent no-repeat center center; }
+.wrap_contentlist table tr td.icon span.file { background:url(../img/backgrounds/icons/datei2_klein.png) transparent no-repeat center center; }
+.wrap_contentlist table tr td.icon span.file_php { background:url(../img/backgrounds/icons/datei_php_klein.png) transparent no-repeat center center; }
 
-.okmsg { color:#9c0; font-weight:bold; border-left:3px solid #9c0; padding-left:5px; }
-.errormsg { color:#c00; font-weight:bold; border-left:3px solid #c00; padding-left:5px; }
+.wrap_contentlist span.filename span.notitle { font-size:80%; font-family:'Monaco','Menlo','Ubuntu Mono','Droid Sans Mono','Consolas',monospace; }
 
+.wrap_contentlist_settings { width:100%; float:left; }
+.wrap_contentlist_settings .setting_url span.label,
+.wrap_contentlist_settings .setting_url span.current,
+.wrap_contentlist_settings .setting_url a { border:1px solid #bbb; display:block; float:left; padding:7px; margin:0 5px 5px 0; text-decoration:none; font-size:11px; text-transform:uppercase; }
+.wrap_contentlist_settings .setting_url span.label { background:none #d5d5d5; color:#333; }
+.wrap_contentlist_settings .setting_url span.current { background:none #f5f5f5; color:#333; }
+.wrap_contentlist_settings .setting_url a { background:none #f5f5f5; color:#555; }
+.wrap_contentlist_settings .setting_url a:hover { background:none #9c0; color:#fff; border:1px solid #590; }
 
 .wrap_footer { width:100%; float:left; border-top:1px solid #bbb; background:none #eee; position:fixed; bottom:0; left:0; z-index:1000; }
 .wrap_footer p.copyright { font-size:10px; text-transform:uppercase; display:block; float:left; padding:4px 7px; margin:0; }

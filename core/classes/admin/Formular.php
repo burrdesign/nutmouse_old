@@ -32,24 +32,32 @@
 		}
 		
 		public function printInputHidden($name,$value=""){
-			if(!$value){
-				$value = $this->form_object[$name];
-			}
+			if(!$value) $value = $this->form_object[$name];
 			echo "<input type=\"hidden\" class=\"hidden\" name=\"$name\" value=\"$value\">\n";
 		}
 		
 		public function printInputText($name,$label,$value="",$class="",$disabled="",$style=""){
-			if(!$value){
-				$value = $this->form_object[$name];
-			}
+			if(!$value) $value = $this->form_object[$name];
 			echo "\n<div class=\"wrap_input\">\n<div class=\"label\">$label</div>\n<div class=\"input\"><input type=\"text\" class=\"text $class\" name=\"$name\" value=\"$value\" style=\"$style\" $disabled>\n</div>\n</div>\n";
 		}
 		
 		public function printInputTextarea($name,$label,$value="",$class="",$disabled="",$style=""){
-			if(!$value){
-				$value = $this->form_object[$name];
-			}
+			if(!$value) $value = $this->form_object[$name];
 			echo "\n<div class=\"wrap_input\">\n<div class=\"label\">$label</div>\n<div class=\"input textarea\"><textarea class=\"text $class\" name=\"$name\" style=\"$style\" $disabled>$value</textarea>\n</div>\n</div>\n";
+		}
+		
+		public function printInputURL($name,$label,$value="",$class="",$disabled="",$style="",$mainurl=""){
+			if(!$value) $value = $this->form_object[$name];
+			if(!$mainurl) $mainurl = $_SESSION['BURRDESIGN']['CONFIG']['HOST']."/";			
+			echo "\n<div class=\"wrap_input\">\n<div class=\"label\">$label</div>\n<div class=\"input input_url\"><span class=\"mainurl\">$mainurl</span><input type=\"text\" class=\"text $class\" name=\"$name\" value=\"$value\" style=\"$style\" $disabled>\n</div>\n</div>\n";
+		}
+		
+		public function printInputSourceCode($name,$label,$value="",$class="",$disabled="",$style=""){
+			if(!$value) $value = $this->form_object[$name];
+			$value = str_replace("<","&lt;",$value);
+			$value = str_replace(">","&gt;",$value);
+			echo "\n<div class=\"wrap_input\">\n<div class=\"label\">$label</div>\n<input type=\"hidden\" value=\"\" id=\"sourcecode_hidden_$name\" name=\"$name\">\n<div id=\"editor_$name\" class=\"input sourcecode\">$value</div>\n</div>\n";
+			echo "<script type=\"text/javascript\">\nvar editor = ace.edit('editor_$name'); \neditor.getSession().setMode('ace/mode/html'); \n\$('form#".$this->form_id."').submit(function(){ \n\$('#sourcecode_hidden_$name').attr('value',editor.getValue()); \n});\n</script>";
 		}
 		
 		public function printSubmit($name,$value,$class="",$disabled="",$style=""){

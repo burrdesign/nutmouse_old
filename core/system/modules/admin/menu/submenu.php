@@ -1,10 +1,19 @@
 <?php
-	//Untermenüs laden
-	$submenu_res = sqlquery("
+
+	/*************************************************************
+	Modul zum ausgeben des Admin-Untermenüs dynamisch aus der DB
+	Version 0.1
+	Copyright by Julian Burr - 06.10.2012
+	*************************************************************/
+	
+	$sql = new SQLManager();
+	$sql->setQuery("
 		SELECT * FROM bd_admin_menu
-		WHERE adminMenuActive = 1 AND adminMenuParent = '".(int)$_SESSION['BURRDESIGN']['ADMIN']['current_page']['mainmenu_info']['adminMenuKey']."'
+		WHERE adminMenuActive = 1 AND adminMenuParent = '{{menukey}}'
 			AND (adminMenuType IS NULL OR adminMenuType = '') 
 		ORDER BY adminMenuPos");
+	$sql->bindParam("{{menukey}}",(int)$_SESSION['BURRDESIGN']['ADMIN']['current_page']['mainmenu_info']['adminMenuKey']);
+	$submenu_res = $sql->execute();
 ?>
 <div class="desc">
 	<div class="box_inner">
