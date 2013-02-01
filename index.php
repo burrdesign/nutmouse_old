@@ -1,16 +1,10 @@
 <?php
+//Session starten
+session_start();
 
-	/***********************************************
-	NutMouse CMS
-	Version 0.1
-	Copyright by Julian Burr - 12.07.2012
-	***********************************************/
+//Hauptbibliothek + -klasse einbinden
+include_once($_SERVER['DOCUMENT_ROOT'].'/core/lib.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/core/classes/BurrDesignCMS.php');
 
-	session_start();
-	
-	include_once($_SERVER['DOCUMENT_ROOT']."/core/system/functions.php");
-	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/BurrDesignCMS.php");
-
-	$_SITE = new BurrDesignCMS($_REQUEST['page']);	
-	
-?>
+//Ausgabe
+$site = new BurrDesignCMS();

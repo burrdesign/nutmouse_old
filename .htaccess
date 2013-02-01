@@ -1,10 +1,26 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
-#RewriteBase /
+RewriteBase /
 
+#Admin-Pfad-Url
 RewriteCond %{REQUEST_URI} !(core\/|images\/|files\/|templates\.js$|\.css$|\.jpg$|\.png$)
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php?page=$1 [PT,L,QSA]
+RewriteRule ^admin/(.*)$ index.php?view=admin&path=$1 [PT,L,QSA]
+
+#News-Key-Url
+RewriteCond %{REQUEST_URI} !(core\/|images\/|files\/|templates\.js$|\.css$|\.jpg$|\.png$)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^news/([0-9]+)/(.*)$ index.php?view=news&ckey=$1 [PT,L,QSA]
+
+#Content-Key-Url
+RewriteCond %{REQUEST_URI} !(core\/|images\/|files\/|templates\.js$|\.css$|\.jpg$|\.png$)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^c/([0-9]+)/(.*)$ index.php?view=content&ckey=$1 [PT,L,QSA]
+
+#Content-Pfad-Url (Canonical)
+RewriteCond %{REQUEST_URI} !(core\/|images\/|files\/|templates\.js$|\.css$|\.jpg$|\.png$)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?view=content&path=$1 [PT,L,QSA]
 </IfModule>
 
 Options -Indexes

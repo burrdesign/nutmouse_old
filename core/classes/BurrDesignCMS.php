@@ -1,56 +1,26 @@
 <?php
 
-	/***********************************************
-	Hauptklasse des BurrDesign NutMouse CMS Systems
-	Version 0.1
-	Copyright by Julian Burr - 30.07.2012
-	***********************************************/
-	
-	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/Session.php");
-	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/AdminPage.php");
-	include_once($_SERVER['DOCUMENT_ROOT']."/core/classes/ContentPage.php");
-	
-	class BurrDesignCMS {		
-		
-		public function __construct($page){
-			
-			//Session holen und ggf. initialisieren
-			$session = new Session();
-			$session->getSession();
-			
-			//Immer auf eingestellten Host umleiten
-			if($_SERVER['HTTP_HOST'] != $_SESSION['BURRDESIGN']['CONFIG']['HOST']){
-				header("Location: http://".$_SESSION['BURRDESIGN']['CONFIG']['HOST'].$_SERVER['REQUEST_URI']);
-				exit;
-			}
-			
-			//Admin-Startseite immer mit abschlieÃŸendem Slash aufrufen
-			if($page == "admin"){
-				header("Location: http://".$_SESSION['BURRDESIGN']['CONFIG']['HOST']."/admin/");
-				exit;
-			}
+/**
+ * @Nutmouse CMS
+ * @Version: 0.2
+ * @Copyright: BurrDesign
+ * @Date: 2012-01-24
+ *
+ * @Beschreibung:
+ *		Hauptklasse für die Initialisierung und Ausgabe des Content Management Systems,
+ *		sowohl Front- als auch Backend. Im Grunde soll diese Klasse nur den Controller
+ *		aufrufen und dessen Rückgabe ausgeben
+ */
 
-			//Adminbereich oder Frontend?
-			if(strpos($page,"admin/") !== false && strpos($page,"admin/") == 0){
-				$content = new AdminPage($page);
-				$load = $content->loadPageModule();
-				if(!$load){
-					$content->printAdminError();
-				}
-				//und Ausgabe
-				$content->printAdminPage();
-			} else {
-				$content = new ContentPage($page);
-				$load = $content->loadPageContent();
-				if(!$load){
-					header("HTTP/1.1 404 Not Found");
-					$content->printPageError(404);
-				}
-				//und Ausgabe
-				$content->printContentPage();
-			}
-		}
-		
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
+
+class BurrDesignCMS {
+
+	private $controller;
+
+	public function __construct(){
+		$this->controller = new Controller($_GET,$_POST);
+		echo $this->controller->display();
 	}
 	
-?>
+}
