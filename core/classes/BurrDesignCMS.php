@@ -17,6 +17,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
 class BurrDesignCMS {
 
 	private $controller;
+	private $session;
 
 	public function __construct(){
 		$this->controller = new Controller($_GET,$_POST);

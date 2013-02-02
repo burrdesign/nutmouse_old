@@ -51,7 +51,7 @@ class FormElement {
 	}
 	
 	public function printHidden($inputname, $inputvalue, $show=false, $label=""){
-		echo "\t\t<input name=\"{$inputname}\" type=\"hidden\"value=\"{$inputvalue}\">\n";
+		echo "\t\t<input name=\"{$inputname}\" type=\"hidden\" value=\"{$inputvalue}\">\n";
 		if($show){
 			$this->printRowStart($label,$inputname,"info");
 			echo "\t\t<span class=\"info\">{$inputvalue}</span>\n";
