@@ -14,9 +14,9 @@
  *		Verfügung stehen müssen.
  */
  
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Frontend/Index.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Frontend/News.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Admin/Index.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Frontend/Index.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Frontend/News.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Admin/Index.php');
 
 //statische Hilfs-Klassen einbinden
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Lib.php');

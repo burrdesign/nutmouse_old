@@ -19,7 +19,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Cache.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Session.php');
 
-class Controller_Frontend_Index extends Controller {
+class Controllers_Frontend_Index extends Controller {
 
 	public function __construct($get,$post){
 		parent::__construct($get,$post);

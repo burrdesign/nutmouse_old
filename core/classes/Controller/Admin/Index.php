@@ -20,7 +20,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Cache.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Session.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Admin.php');
 
-class Controller_Admin_Index extends Controller {
+class Controllers_Admin_Index extends Controller {
 
 	public function __construct($get,$post){
 		parent::__construct($get,$post);
