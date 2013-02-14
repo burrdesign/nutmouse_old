@@ -4,45 +4,25 @@
  * @Nutmouse CMS
  * @Version: 0.2
  * @Copyright: BurrDesign
- * @Date: 2012-01-24
+ * @Date: 2012-02-14
  *
  * @Beschreibung:
- *		Content-Controller im MVC-Framework. Hier wird anhand der übergebenen Parameter
+ *		News-Content-Controller im MVC-Framework. Hier wird anhand der übergebenen Parameter
  *		das entsprechende Model geladen und die Seite erzeugt und zur Ausgabe an die
  *		Hauptklasse übergeben
  */
  
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Models/Frontend/Index.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Cache.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Session.php');
 
-class Controller_Frontend_News {
-
-	private $request = array();
-	private $get = array();
-	private $post = array();
-	private $template = '';
-	private $view = null;
+class Controller_Frontend_News extends Controller {
 
 	public function __construct($get,$post){
-		//Reqeust-Arrays speichern
-		$this->get = $get;
-		$this->post = $post;
-		$this->request = array_merge($get, $post);
-	
-		//Session laden und ggf. initialisieren
-		$this->session = new Session($get,$post);
-		$this->session->getSession();
-	
-		//Äußerer View
-		$this->view = new View();
-		
-		$this->template = 'default';
-		if(!empty($this->request['view'])){
-			$this->template = $this->request['view'];
-		}
+		parent::__construct($get,$post);
 	}
 
 	//Ausgabe generieren und zurückgeben

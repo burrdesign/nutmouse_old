@@ -10,13 +10,11 @@
  *		Model-Klasse zum laden der angeforderten Inhalte (sowohl Front- als auch Backend!)
  */
 
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Model.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/db/SqlManager.php');
 
-class Models_Admin_Index {
+class Models_Admin_Index extends Model {
 
-	private static $entry = array();
-	private static $sql;
-	
 	public static function getAdminContentByPath($path){
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
