@@ -6,5 +6,9 @@
  * @Copyright: BurrDesign
  * @Date: 2012-01-24
  *
- * @Beschreibung: Hauptbibliothek für Grundfunktionen etc.
+ * @Beschreibung: Hauptbibliothek von kleineren Hilfsfunktionen
  */
+ 
+class Lib {
+
+}
