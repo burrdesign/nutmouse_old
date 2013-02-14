@@ -23,29 +23,17 @@
 		$messages['ok'] = 'Die Einstellungen wurden erfolgreich gespeichert!';
 		
 		//Config-Cache löschen
-		$config = Cache::clearCache("config");
+		Cache::clearCache("config");
 	}
 	 
 	/*
 	 * Einstellungen laden
 	 */
-	$config = Cache::loadCache("config");
-	
-	if(!is_array($config)){
-		//kein Cache vorhanden, also neu laden
-		$sql = new SqlManager();
-		$sql->setQuery("SELECT * FROM bd_sys_config");
-		$result = $sql->execute();
-		$config = array();
-		while($res = mysql_fetch_array($result)){
-			$config[$res['configLabel']] = $res['configValue'];
-		}
-		Cache::saveCache("config",$config);
-	}
+	$config = Config::load("config");
 ?>
 
 <div class="mask_intro">
-	<h2 class="mask_title"><span class="icon icon-pawn"></span> Grundeinstellungen</h2>
+	<h2 class="mask_title"><span class="icon icon-cog"></span> Grundeinstellungen</h2>
 	<p class="mask_desc">Hier legen Sie grundlegende Einstellungen für Ihre Website und das System fest. Diese Einstellungen k&ouml;nnen Einfluss auf die Darstellung im Frontend haben. &Auml;nderungen werden sofort wirksam!</p>
 </div>
 
@@ -69,9 +57,9 @@
 		$form->addMandatory("maintitle","string");
 		
 		$form->start("","post");
-		$form->element->printHidden("do","saveConfig");
-		$form->element->printTextfield("Haupt-Seitentitel", "maintitle", $config['maintitle']);
-		$form->element->printSubmit("Speichern");
+		$form->row->printHidden("do","saveConfig");
+		$form->row->printTextfield("Haupt-Seitentitel", "maintitle", $config['maintitle']);
+		$form->row->printSubmit("Speichern");
 		$form->end();
 	
 	?>
