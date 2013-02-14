@@ -24,14 +24,8 @@
 		</div>
 		
 		<div class="wrap_content">
-			<div class="wrap_submenu">
-				<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/core/templates/admin/menu/submenu.tpl'); ?>
-			</div>
-			
-			<div class="wrap_mask">
-				<div class="wrap_mask_inner">
+			<div class="wrap_content_inner">
 					<?php echo $this->_['admin_content']; ?>
-				</div>
 			</div>
 		</div>
 	
