@@ -1,0 +1,36 @@
+/*
+ * Styles für eine Fensterbreite < 1050px
+ */
+
+.wrap_all {
+	width:100%;
+	margin:0;
+	padding:0;
+	position:relative;
+}
+
+.wrap_content {
+	position:relative;
+}
+
+.wrap_content .wrap_mask {
+	width:auto;
+	position:absolute;
+	left:240px;
+	top:0;
+}
+
+.wrap_content .wrap_mask .wrap_mask_inner {
+	padding:0 25px 0 50px;
+}
+
+.mask_form .input_label,
+.mask_form .input_field { 
+	width:100%;
+}
+
+.mask_table table.filetree tr td.version,
+.mask_table table.filetree tr td.size,
+.mask_table table tr td.hide_1050 {
+	display:none;
+}

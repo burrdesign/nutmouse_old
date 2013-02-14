@@ -1,0 +1,67 @@
+/*
+ * Styles für eine Fensterbreite < 650px
+ */
+ 
+.wrap_head,
+.wrap_content .wrap_submenu {
+	border-bottom:1px solid #999;
+}
+
+.wrap_head ul.mainmenu,
+.wrap_head ul.icons {
+	display:none;
+}
+
+.wrap_head .wrap_mainmenu_select {
+	display:block;
+	float:left;
+	line-height:55px;
+}
+
+.wrap_head .wrap_mainmenu_select form {
+	float:left;
+}
+
+.wrap_head .wrap_mainmenu_select select#mainmenu_select_goto {
+	padding:7px;
+	margin:0 15px;
+}
+
+.wrap_content {
+	margin:0;
+}
+
+.wrap_content .wrap_submenu {
+	width:100%;
+}
+
+.wrap_content .wrap_mask {
+	position:relative;
+	left:auto;
+	top:auto;
+	margin:0;
+	padding:0;
+	width:100%;
+	float:left;
+}
+
+.wrap_content .wrap_mask .wrap_mask_inner {
+	padding:10px 10px 25px 10px;
+}
+
+.dashboard .widget {
+	width:100% !important;
+	margin:0;
+	background:none transparent;
+	border-bottom:1px solid #ddd;
+}
+
+.mask_table table.filetree tr td.title,
+.mask_table table.filetree tr td.lastchanged,
+.mask_table table tr td.hide_650 {
+	display:none;
+}
+
+.mask_table table.filetree tr td.path {
+	width:auto;
+}
