@@ -50,3 +50,35 @@
 <li><a href="/admin/logout" class="icon_logout"><span class="icon"></span><span class="title">Logout</span></a></li>
 	
 </ul>
+
+<!-- Mainmenu Select für responsives Design -->
+<div class="wrap_mainmenu_select">
+	<div class="trenner"></div>
+	<form name="mainmenu" action="" method="post" id="mainmenu_select">
+	<!-- Die Steuerung muss dann per jQuery erfolgen! -->
+	
+	<select name="goto" id="mainmenu_select_goto">
+	
+		<?php
+			$sql->setQuery("
+				SELECT * FROM bd_sys_admin_menu
+				WHERE menuParent IS NULL AND menuActive = 1
+				ORDER BY menuType, menuPos
+				");
+			$menus = $sql->execute();
+			while($menu = mysql_fetch_array($menus)){
+				$selected = '';
+				if($this->_['mainmenu'] == $menu['menuKey']){
+					$selected = 'selected="selected"';
+				}
+				echo '\t\t<option value="' . $menu['menuLink'] . '" ' . $selected . '><span>' . $menu['menuLabel'] . '</option>\n';
+			}
+		?>
+	
+		<option value="/logout">Logout</option>
+		
+	</select>
+	
+	</form>
+</div>
+		
