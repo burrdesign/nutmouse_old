@@ -16,10 +16,12 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/admin/FormElement.php');
 class Form {
 
 	public $element;
+	public $row;
 	private $mandatory = array();
 	
 	public function __construct(){
 		$this->element = new FormElement();
+		$this->row = new FormElementRow();
 	}
 	
 	public function addMandatory($name,$type,$pattern=""){

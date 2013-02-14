@@ -107,6 +107,13 @@ class SqlManager {
 		return $key;
 	}
 	
+	public function getLineCount($table){
+		$this->setQuery("SELECT * FROM ".mysql_real_escape_string($table));
+		$result = $this->execute();
+		$cnt = mysql_num_rows($result);
+		return $cnt;
+	}
+	
 	public function update($table,$object){
 		//Datensatz anhand eines Arrays updaten
 		$this->q_table = $table;
