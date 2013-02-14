@@ -9,26 +9,32 @@
  * @Beschreibung:
  *		Hauptklasse für die Initialisierung und Ausgabe des Content Management Systems,
  *		sowohl Front- als auch Backend. Im Grunde soll diese Klasse nur den Controller
- *		aufrufen und dessen Rückgabe ausgeben
+ *		richtigen aufrufen und dessen Rückgabe ausgeben.
+ *		Außerdem werden hier die statischen Hilfsklassen eingebunden, die überall zur
+ *		Verfügung stehen müssen.
  */
-
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Log.php');
-
+ 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Frontend/Index.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Frontend/News.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Admin/Index.php');
 
+//statische Hilfs-Klassen einbinden
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Lib.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Log.php');
+
 class BurrDesignCMS {
 
+	private $view;
 	private $controller;
 
 	public function __construct(){
+		$this->view = $_REQUEST['view'];
 		echo $this->display();
 	}
 	
 	//Ausgabe generieren und zurückgeben
 	public function display(){
-		switch($_REQUEST['view']){
+		switch($this->view){
 			case 'content': 
 				//Normaler Inhalt
 				$this->controller = new Controller_Frontend_Index($_GET,$_POST);
@@ -46,11 +52,11 @@ class BurrDesignCMS {
 				
 			case 'default':
 			default:
-				$output =  "<pre>VIEW=" . $this->template . "</pre>";
+				$output =  "<pre>VIEW=" . $this->view . "</pre>";
 				break;
 		}
 		
-		$output = $this->controller->display();
+		if(is_object($this->controller)) $output = $this->controller->display();
 		return $output;
 	}
 	

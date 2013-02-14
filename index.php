@@ -4,12 +4,13 @@
  * @Nutmouse CMS
  * @Version: 0.2
  * @Copyright: BurrDesign
- * @Date: 2012-01-24
+ * @Date: 2012-02-14
  */
 
 session_start();
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/lib.php');
+//Hauptklasse laden
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/BurrDesignCMS.php');
 
+//...und Ausgabe generieren
 $site = new BurrDesignCMS();
