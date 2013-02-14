@@ -12,16 +12,46 @@
  *		aufrufen und dessen Rückgabe ausgeben
  */
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Log.php');
+
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Frontend/Index.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Frontend/News.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller/Admin/Index.php');
 
 class BurrDesignCMS {
 
 	private $controller;
-	private $session;
 
 	public function __construct(){
-		$this->controller = new Controller($_GET,$_POST);
-		echo $this->controller->display();
+		echo $this->display();
+	}
+	
+	//Ausgabe generieren und zurückgeben
+	public function display(){
+		switch($_REQUEST['view']){
+			case 'content': 
+				//Normaler Inhalt
+				$this->controller = new Controller_Frontend_Index($_GET,$_POST);
+				break;
+			
+			case 'news':
+				//Neuigkeit im Frontend
+				$this->controller = new Controller_Frontend_News($_GET,$_POST);
+				break;
+				
+			case 'admin':
+				//Adminseite
+				$this->controller = new Controller_Admin_Index($_GET,$_POST);
+				break;
+				
+			case 'default':
+			default:
+				$output =  "<pre>VIEW=" . $this->template . "</pre>";
+				break;
+		}
+		
+		$output = $this->controller->display();
+		return $output;
 	}
 	
 }

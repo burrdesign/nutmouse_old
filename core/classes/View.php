@@ -19,25 +19,15 @@ class View {
 	//Variablen, die im Template zur Verfügung stehen sollen
 	private $_ = array();
 
-	/**
-	 * @Beschreibung: Variablen initialisieren
-	 * @param: key		Variablenname
-	 * @param: value	Variablenwert
-	 */
+	//Variable für das aktuelle Template zuweisen
 	public function assign($key, $value){
 		$this->_[$key] = $value;
 	}
 
-	/**
-	 * @param: template		Name des zu setzenden Templates
-	 */
 	public function setTemplate($template = 'default'){
 		$this->template = $template;
 	}
 
-	/**
-	 * @Beschreibung: laden des von setTemplate() gesetzten Ausgabe-Templates
-	 */
 	public function loadTemplate(){
 		$tpl = $this->template;
 		

@@ -12,20 +12,13 @@
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/db/SqlManager.php');
 
-class Model {
+class Models_Frontend_Index {
 
 	private static $entry = array();
 	private static $sql;
 	
-	/**
-	 * @param: path		angeforderter URL-Pfad
-	 */
-	public static function getContentByPath($path){
-		/**
-		 * hier ggf. guter Ansatzpunkt für Cache-Abfrage?! Aber woher die ExpireTime nehmen, 
-		 * wenn ich die Seitenspez. einstellbar machen will??
-		 */
 	
+	public static function getContentByPath($path){
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
 			SELECT * FROM bd_main_content
@@ -45,15 +38,8 @@ class Model {
 		}
 	}
 	
-	/**
-	 * @param: key	angeforderter Content-Schlüssel
-	 */
+	
 	public static function getContentByKey($key){
-		/**
-		 * hier ggf. guter Ansatzpunkt für Cache-Abfrage?! Aber woher die ExpireTime nehmen, 
-		 * wenn ich die Seitenspez. einstellbar machen will??
-		 */
-		
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
 			SELECT * FROM bd_main_content
@@ -73,15 +59,7 @@ class Model {
 		}
 	}
 	
-	/**
-	 * @param: path		angeforderter URL-Pfad
-	 */
 	public static function getAdminContentByPath($path){
-		/**
-		 * hier ggf. guter Ansatzpunkt für Cache-Abfrage?! Aber woher die ExpireTime nehmen, 
-		 * wenn ich die Seitenspez. einstellbar machen will??
-		 */
-	
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
 			SELECT * FROM bd_sys_admin_module
