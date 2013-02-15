@@ -50,15 +50,15 @@
 			$messages['error'] = 'Es ist ein Fehler aufgetreten!';
 		}
 	}
-	 
-	/*
-	 * Datei laden
-	 */
-	if(!is_file($_SERVER['DOCUMENT_ROOT'] . '/' . $path) && !is_dir($_SERVER['DOCUMENT_ROOT'] . '/' . $path)){
-		$messages['error'] = 'Pfad ist ung&uuml;ltig!';
-	}
 	
 	if($messages['error'] || $this->_['post']['do'] != 'removeFile'){
+	 
+		/*
+		 * Datei laden
+		 */
+		if(!is_file($_SERVER['DOCUMENT_ROOT'] . '/' . $path) && !is_dir($_SERVER['DOCUMENT_ROOT'] . '/' . $path)){
+			$messages['error'] = 'Pfad ist ung&uuml;ltig!';
+		}
 ?>
 
 <div class="mask_intro">

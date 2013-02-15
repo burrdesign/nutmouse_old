@@ -28,27 +28,27 @@
 			$messages['error'] = 'Es ist ein Fehler aufgetreten!';
 		}
 	}
-	 
-	/*
-	 * Seite laden
-	 */
-	if((int)$key > 0){
-		$sql->setQuery("
-			SELECT * FROM bd_main_news
-			WHERE newsKey = {{key}}
-			LIMIT 1
-			");
-		$sql->bindParam("{{key}}",$key,"int");
-		$news = $sql->result();
-		
-		if(!$news['newsKey']){
-			$messages['error'] = 'News konnte nicht gefunden werden!';
-		}
-	} else {
-		$messages['error'] = 'News konnte nicht gefunden werden!';
-	}
 	
 	if($messages['error'] || $this->_['post']['do'] != 'removeNews'){
+	 
+		/*
+		 * Seite laden
+		 */
+		if((int)$key > 0){
+			$sql->setQuery("
+				SELECT * FROM bd_main_news
+				WHERE newsKey = {{key}}
+				LIMIT 1
+				");
+			$sql->bindParam("{{key}}",$key,"int");
+			$news = $sql->result();
+			
+			if(!$news['newsKey']){
+				$messages['error'] = 'News konnte nicht gefunden werden!';
+			}
+		} else {
+			$messages['error'] = 'News konnte nicht gefunden werden!';
+		}
 ?>
 
 <div class="mask_intro">

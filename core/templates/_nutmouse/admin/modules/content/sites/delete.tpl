@@ -36,28 +36,28 @@
 			$messages['error'] = 'Es ist ein Fehler aufgetreten!';
 		}
 	}
-	 
-	/*
-	 * Seite laden
-	 */
-	if((int)$key > 0){
-		$sql->setQuery("
-			SELECT * FROM bd_main_content
-			WHERE contentKey = {{key}}
-			LIMIT 1
-			");
-		$sql->bindParam("{{key}}",$key,"int");
-		$site = $sql->result();
-		$p = split('/',$site['contentPath']);
-		$tree = substr($site['contentPath'], 0, -1 * strlen($p[count($p)-1]));
-		if(!$site['contentKey']){
-			$messages['error'] = 'Inhalt konnte nicht gefunden werden!';
-		}
-	} else {
-		$messages['error'] = 'Der Inhalt konnte nicht gefunden werden!';
-	}
 	
 	if($messages['error'] || $this->_['post']['do'] != 'removeSite'){
+	 
+		/*
+		 * Seite laden
+		 */
+		if((int)$key > 0){
+			$sql->setQuery("
+				SELECT * FROM bd_main_content
+				WHERE contentKey = {{key}}
+				LIMIT 1
+				");
+			$sql->bindParam("{{key}}",$key,"int");
+			$site = $sql->result();
+			$p = split('/',$site['contentPath']);
+			$tree = substr($site['contentPath'], 0, -1 * strlen($p[count($p)-1]));
+			if(!$site['contentKey']){
+				$messages['error'] = 'Inhalt konnte nicht gefunden werden!';
+			}
+		} else {
+			$messages['error'] = 'Der Inhalt konnte nicht gefunden werden!';
+		}
 ?>
 
 <div class="mask_intro">
