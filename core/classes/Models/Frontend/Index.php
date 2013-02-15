@@ -11,7 +11,7 @@
  */
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Model.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/db/SqlManager.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
 
 class Models_Frontend_Index extends Model {
 

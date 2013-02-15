@@ -11,7 +11,8 @@
  */
  
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Session.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Session.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Config.php');
 
 class Controller {
 
@@ -34,9 +35,9 @@ class Controller {
 		//Äußerer View
 		$this->view = new View();
 		
-		$this->template = 'default';
+		$this->display = 'default';
 		if(!empty($this->request['view'])){
-			$this->template = $this->request['view'];
+			$this->display = $this->request['view'];
 		}
 	}
 

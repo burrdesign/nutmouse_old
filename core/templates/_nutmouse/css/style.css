@@ -1,0 +1,62 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,500,500italic,700,700italic);
+
+body { margin:0; padding:0; width:100%; font-family:"Trebuchet MS", Arial, sans; font-size:13px; color:#222; background:none #5d99c3; }
+
+.background { width:100%; position:fixed; left:0; top:0; z-index:-1; }
+iframe.background { top:70px; }
+
+.clear { clear:both; }
+
+.wrap_all { width:100%; float:left; min-height:100%; }
+
+.wrap_head { width:100%; background:none #fff; position:fixed; top:0; left:0; z-index:1000; }
+.wrap_head .inner { width:900px; margin-left:-450px; padding-left:50%; position:relative; }
+
+.logo { float:left; }
+.logo h1 { font-weight:normal; text-transform:uppercase; margin:0 20px; padding:0; line-height:70px; font-size:200%; }
+.logo h1 .bold { font-weight:bold; }
+
+.head_info { float:right; }
+.head_info ul { margin:8px 0; padding:0; }
+.head_info li { font-size:85%; color:#888; line-height:17px; padding:0 0 0 20px; list-style:none; }
+.head_info li a { color:#888; text-decoration:none; }
+.head_info li a:hover { text-decoration:underline; }
+
+.head_info li.place { background:url(../img/icon_map.png) transparent no-repeat 1px 1px; }
+.head_info li.contact { background:url(../img/icon_phone.png) transparent no-repeat 1px 1px; }
+.head_info li.open { background:url(../img/icon_clock.png) transparent no-repeat 1px 1px; }
+
+.wrap_main { width:900px; margin-left:-450px; padding-left:50%; }
+.wrap_main .inner { margin:100px 0 70px 0; width:540px; float:right; position:relative; }
+
+.angebot { text-align:right; width:100%; float:left; background:#fff; opacity:0.95; position:relative; }
+.angebot .flag { width:150px; height:150px; position:absolute; top:-2px; left:-2px; background:url(../img/marker_tipp.png) transparent no-repeat 0 0; }
+.angebot .padding { padding:20px; float:left; }
+.angebot h2 { font-size:360%; font-weight:normal; margin:0; }
+.angebot h3 { font-size:220%; font-weight:normal; margin:20px 0; float:right; }
+.angebot p { font-size:120%; margin:0; padding:0; float:right; }
+.angebot .image { float:right; margin:25px 0 20px 20px; }
+
+.wrap_main .inner .padding_box { padding:20px; background:#fff; }
+
+.marken { width:100%; float:left; height:105px; background:#fff; position:relative; overflow:auto; }
+
+.wrap_sliders { width:900px; }
+.wrap_sliders .slider { width:180px; text-align:center; float:left; margin:0; padding:0; }
+
+.wrap_footer { width:100%; background:#fff; position:fixed; bottom:0; left:0; z-index:1000; }
+.wrap_footer .inner { width:900px; margin-left:-450px; padding-left:50%; position:relative; }
+
+.footer_copyright { font-size:85%; color:#888; float:left; }
+.footer_copyright p { line-height:35px; margin:0; padding:0; }
+
+.footer_nav { font-size:85%; float:right; }
+.footer_nav ul { margin:0; padding:0; list-style:none; }
+.footer_nav ul li { float:left; padding:0 0 0 15px; margin:0; line-height:35px; }
+.footer_nav ul li a { color:#888; text-decoration:none; }
+.footer_nav ul li a:hover { text-decoration:underline; }
+
+.shadow { position:absolute; height:15px; width:100%; left:0; }
+.shadow_bottom { bottom:-15px; background:url(../img/shadow_bottom.png) repeat-x transparent left top; }
+.shadow_top { top:-15px; background:url(../img/shadow_top.png) repeat-x transparent left bottom; }

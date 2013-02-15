@@ -16,9 +16,9 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Models/Admin/Index.php')
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Cache.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Session.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Admin.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Session.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Admin.php');
 
 class Controllers_Admin_Index extends Controller {
 
@@ -47,15 +47,12 @@ class Controllers_Admin_Index extends Controller {
 			if(is_array($entry)){
 				//Haupttemplate vorbereiten
 				$template = 'admin/' . $entry['moduleTemplate'];
-				if(!is_file($_SERVER['DOCUMENT_ROOT'] . '/core/templates/' . $template . '.tpl')){
+				if(!$entry['moduleTemplate']){
 					$template = 'admin/index';
 				}
 				
 				//inneres Template vorbereiten
 				$inner_template = 'admin/modules/' . $entry['moduleCoreFile'];
-				if(!is_file($_SERVER['DOCUMENT_ROOT'] . '/core/templates/' . $inner_template . '.tpl')){
-					$inner_template = 'admin/error/error404';
-				}
 				
 				//Menüs ermitteln und vorbereiten
 				if($entry['menuParent'] > 0){

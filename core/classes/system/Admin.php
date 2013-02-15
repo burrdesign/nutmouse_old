@@ -11,7 +11,7 @@
  *		und den Login- bzw. Logout-Actions
  */
  
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/db/SqlManager.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
  
 class Admin {
 

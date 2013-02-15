@@ -16,8 +16,8 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Models/Frontend/Index.ph
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Cache.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Session.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Session.php');
 
 class Controllers_Frontend_News extends Controller {
 

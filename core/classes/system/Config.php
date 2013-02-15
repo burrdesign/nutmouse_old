@@ -11,8 +11,8 @@
  *		Hier sollte ggf. ein Hook für Plugins eingebaut werdem?!
  */
  
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/system/Cache.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/db/SqlManager.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
  
 class Config {
 	
@@ -32,6 +32,13 @@ class Config {
 		}
 		
 		return $config;
+	}
+	
+	public static function get($key){
+		if(!$_SESSION['BD']['config']){
+			$_SESSION['BD']['config'] = self::load();
+		}
+		return $_SESSION['BD']['config'][$key];
 	}
 	
 }
