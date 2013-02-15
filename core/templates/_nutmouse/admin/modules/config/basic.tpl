@@ -1,4 +1,6 @@
 <?php
+	$templatepath = $_SERVER['DOCUMENT_ROOT'] . '/core/templates/';
+
 	/**
 	 * ACTIONPHASE:
 	 * Speichern der Einstellungen
@@ -55,7 +57,17 @@
 		$form->start("","post");
 		$form->row->printHidden("do","saveConfig");
 		$form->row->printTextfield("Haupt-Seitentitel", "maintitle", $config['maintitle']);
-		$form->row->printTextfield("Theme", "theme", $config['theme']);
+		
+		//Themes aus Verzeichnis laden
+		$themes = array();
+		$handle = opendir($templatepath);
+		while($theme = readdir($handle)){
+			if(is_dir($templatepath . $theme) && $theme != "." && $theme != ".." && $theme != "_nutmouse"){
+				$themes[] = $theme;
+			}
+		}
+		$form->row->printSelect("Theme", "theme", $config['theme'], $themes);
+		
 		$form->row->printSubmit("Speichern");
 		$form->end();
 	
