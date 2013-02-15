@@ -516,6 +516,13 @@ a.submit:hover {
 	color:#550;
 }
 
+.mask_table table a.icon-arrow-up:hover,
+.mask_table table a.icon-arrow-left:hover,
+.mask_table table a.icon-arrow-down:hover,
+.mask_table table a.icon-arrow-right:hover {
+	color:#6363ff;
+}
+
 .mask_table .list_paging,
 .mask_table .filetree_path {
 	width:100%;
