@@ -8,7 +8,7 @@
 	<div class="wrap_all">
 	
 		<div class="wrap_head">
-			<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/core/templates/_nutmouse/admin/menu/mainmenu.tpl'); ?>
+			<?php include_once($_SERVER['DOCUMENT_ROOT'] . '/core/templates/_nutmouse/admin/page/menu/mainmenu.tpl'); ?>
 		</div>
 		
 		<div class="wrap_content">
