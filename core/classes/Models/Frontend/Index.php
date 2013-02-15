@@ -15,6 +15,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
 
 class Models_Frontend_Index extends Model {
 
+	//Inhalt anhand des Pfades laden
 	public static function getContentByPath($path){
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
@@ -35,7 +36,7 @@ class Models_Frontend_Index extends Model {
 		}
 	}
 	
-	
+	//Inhalt anhand des Schlüssels laden
 	public static function getContentByKey($key){
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
@@ -50,26 +51,6 @@ class Models_Frontend_Index extends Model {
 		//Hier findet ggf. noch Nachbereitung statt
 		
 		if(self::$entry['contentKey']){
-			return self::$entry;
-		} else {
-			return false;
-		}
-	}
-	
-	public static function getAdminContentByPath($path){
-		self::$sql = new SqlManager();
-		self::$sql->setQuery("
-			SELECT * FROM bd_sys_admin_module
-			LEFT JOIN bd_sys_admin_menu ON (moduleMenu = menuKey)
-			WHERE modulePath = '{{path}}' AND moduleActive = 1
-			LIMIT 1
-			");
-		self::$sql->bindParam("{{path}}",$path);
-		self::$entry = self::$sql->result();
-		
-		//Hier findet ggf. noch Nachbereitung statt
-		
-		if(self::$entry['moduleKey']){
 			return self::$entry;
 		} else {
 			return false;
