@@ -46,6 +46,25 @@ class FormElement {
 		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"file\" class=\"file {$inputclass}\" id=\"{$inputname}\" style=\"{$inputstyle}\">{$posttext}\n";
 	}
 	
+	public function printSelect($inputname, $inputvalue, $inputoptions, $inputoptionlabels=array(), $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+		if(!is_array($inputoptions)){
+			return;
+		}
+		echo "\t\t{$pretext}\n\t\t<select name=\"{$inputname}\" class=\"select {$inputclass}\" id=\"{$inputname}\" style=\"{$inputstyle}\">\n";
+		foreach($inputoptions as $option){
+			$selected = "";
+			if($option == $inputvalue){
+				$selected = "selected=\"selected\"";
+			}
+			$value = $option;
+			if(!empty($inputoptionlabels[$option])){
+				$value = $inputoptionlabels[$option];
+			}
+			echo "\t\t\t<option value=\"{$option}\" val {$selected}>{$value}</option>\n";
+		}
+		echo "\t\t</select>\n\t\t{$posttext}";
+	}
+	
 	public function printSubmit($label, $inputname="", $inputclass="", $inputstyle=""){
 		echo "\t\t<input name=\"{$inputname}\" type=\"submit\" class=\"submit {$inputclass}\" value=\"{$label}\" style=\"{$inputstyle}\">\n";
 	}
@@ -133,6 +152,12 @@ class FormElementRow {
 	public function printUpload($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
 		$this->start($label,$inputname,"text");
 		$this->core->printUpload($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext);
+		$this->end();
+	}
+	
+	public function printSelect($label, $inputname, $inputvalue, $inputoptions, $inputoptionlabels=array(), $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+		$this->start($label,$inputname,"select");
+		$this->core->printSelect($inputname, $inputvalue, $inputoptions, $inputoptionlabels=array(), $inputclass="", $inputstyle="", $pretext="", $posttext="");
 		$this->end();
 	}
 	
