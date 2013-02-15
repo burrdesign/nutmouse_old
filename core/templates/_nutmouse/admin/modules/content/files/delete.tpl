@@ -1,6 +1,4 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Form.php');
-	
 	$path = $_REQUEST['removeFile'];
 	$split = split('/',$path);
 	if(is_file($_SERVER['DOCUMENT_ROOT'] . '/' . $path)){

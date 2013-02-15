@@ -1,7 +1,6 @@
 <ul class="submenu">
 
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
 	$sql = new SqlManager();
 	$sql->setQuery("
 		SELECT * FROM bd_sys_admin_menu

@@ -1,5 +1,6 @@
 <?php
 	$templatepath = $_SERVER['DOCUMENT_ROOT'] . '/core/templates/';
+	$default_theme = '_nutmouse';
 
 	/**
 	 * ACTIONPHASE:
@@ -62,7 +63,7 @@
 		$themes = array();
 		$handle = opendir($templatepath);
 		while($theme = readdir($handle)){
-			if(is_dir($templatepath . $theme) && $theme != "." && $theme != ".." && $theme != "_nutmouse"){
+			if(is_dir($templatepath . $theme) && $theme != "." && $theme != ".." && $theme != $default_theme){
 				$themes[] = $theme;
 			}
 		}
