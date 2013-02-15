@@ -1,9 +1,5 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Form.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
-	
-	/*
+	/**
 	 * ACTIONPHASE:
 	 * Speichern der Einstellungen
 	 */
@@ -26,7 +22,7 @@
 		Cache::clearCache("config");
 	}
 	 
-	/*
+	/**
 	 * Einstellungen laden
 	 */
 	$config = Config::load("config");

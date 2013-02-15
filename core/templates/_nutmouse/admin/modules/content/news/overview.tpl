@@ -1,6 +1,4 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Form.php');
 	
 	$page = $_REQUEST['page'] - 1;
 	if(!$page || $page < 0){
@@ -67,14 +65,14 @@
 				echo "\t</div>\n";
 			}
 			
-			echo "\t<table class=\"list list\" cellpadding=0 cellspacing=0>\n";
+			echo "\t<table class=\"list list_news\" cellpadding=0 cellspacing=0>\n";
 			while($news = mysql_fetch_array($newsquery)){ 
 				echo "
 					\t\t<tr class=\"{$class}\">\n
 					\t\t\t<td class=\"key first width_30 align_center\">{$news['newsKey']}</td>\n
 					\t\t\t<td class=\"title\">{$news['newsTitle']}</td>\n
 					\t\t\t<td class=\"releasedate width_120 font_small hide_650 align_right\">" . date("D, j. M Y", strtotime($news['newsReleaseDate'])) . "</td>\n
-					\t\t\t<td class=\"action\"><a href=\"?editNews={$news['newsKey']}\" class=\"icon icon-pencil\" title=\"News bearbeiten\"></span></td>\n
+					\t\t\t<td class=\"action\"><a href=\"?editNews={$news['newsKey']}\" class=\"icon icon-pencil\" title=\"News bearbeiten\"></a></td>\n
 					\t\t\t<td class=\"action\"><a href=\"?removeNews={$news['newsKey']}\" class=\"icon icon-cancel-circle\" title=\"News l&ouml;schen\"></a></td>\n
 					\t\t</tr>\n";
 					$class = '';

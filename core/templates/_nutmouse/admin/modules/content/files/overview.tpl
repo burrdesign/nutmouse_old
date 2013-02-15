@@ -1,6 +1,4 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Form.php');
-	
 	$path = $_REQUEST['tree'];
 	$split = split('/',$path);
 	$subpath = substr($path, 0, (-1 * strlen($split[count($split)-2])) - 1);
@@ -28,7 +26,7 @@
 			$messages['ok'] = 'Datei wurde erfolgreich hochgeladen!';
 		} else {
 			//Datei existiert bereits
-			$messages['error'] = 'Das gew&uuml;nschte Datei existiert bereits!';
+			$messages['error'] = 'Die gew&uuml;nschte Datei existiert bereits!';
 		}
 	}
 	
@@ -163,7 +161,7 @@
 		
 		$form->end();
 		
-		//Neues Datei hochladen
+		//Neue Datei hochladen
 		$form->start("?tree={$path}","post","multipart/form-data");
 		
 		$form->row->printHidden("do","uploadFile");
