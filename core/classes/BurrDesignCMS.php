@@ -37,17 +37,17 @@ class BurrDesignCMS {
 		switch($this->view){
 			case 'content': 
 				//Normaler Inhalt
-				$this->controller = new Controller_Frontend_Index($_GET,$_POST);
+				$this->controller = new Controllers_Frontend_Index($_GET,$_POST);
 				break;
 			
 			case 'news':
 				//Neuigkeit im Frontend
-				$this->controller = new Controller_Frontend_News($_GET,$_POST);
+				$this->controller = new Controllers_Frontend_News($_GET,$_POST);
 				break;
 				
 			case 'admin':
 				//Adminseite
-				$this->controller = new Controller_Admin_Index($_GET,$_POST);
+				$this->controller = new Controllers_Admin_Index($_GET,$_POST);
 				break;
 				
 			case 'default':
