@@ -302,6 +302,11 @@ body.login .wrap_loginmask .loginmask_form input.submit:hover {
 	float:left
 }
 
+.mask_form .input_field input.checkbox {
+	margin:7px 0;
+	float:left;
+}
+
 .mask_form .input_field label {
 	margin:5px 10px 0 2px;
 	float:left;

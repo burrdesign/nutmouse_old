@@ -65,6 +65,15 @@ class FormElement {
 		echo "\t\t</select>\n\t\t{$posttext}";
 	}
 	
+	public function printEnable($inputname, $inputvalue, $truevalue=1, $falsevalue=0, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+		$checked = "";
+		if($inputvalue == $truevalue){
+			$checked = "checked=\"checked\"";
+		}
+		echo "\t\t<input name=\"{$inputname}\" type=\"hidden\" value=\"{$falsevalue}\">\n";
+		echo "\t\t{$pretext}\n\t\t<input name=\"{$inputname}\" type=\"checkbox\" class=\"checkbox {$inputclass}\" value=\"{$truevalue}\" style=\"{$inputstyle}\" {$checked}>\t\t{$posttext}\n";
+	}
+	
 	public function printSubmit($label, $inputname="", $inputclass="", $inputstyle=""){
 		echo "\t\t<input name=\"{$inputname}\" type=\"submit\" class=\"submit {$inputclass}\" value=\"{$label}\" style=\"{$inputstyle}\">\n";
 	}
@@ -157,7 +166,13 @@ class FormElementRow {
 	
 	public function printSelect($label, $inputname, $inputvalue, $inputoptions, $inputoptionlabels=array(), $inputclass="", $inputstyle="", $pretext="", $posttext=""){
 		$this->start($label,$inputname,"select");
-		$this->core->printSelect($inputname, $inputvalue, $inputoptions, $inputoptionlabels=array(), $inputclass="", $inputstyle="", $pretext="", $posttext="");
+		$this->core->printSelect($inputname, $inputvalue, $inputoptions, $inputoptionlabels, $inputclass, $inputstyle, $pretext, $posttext);
+		$this->end();
+	}
+	
+	public function printEnable($label, $inputname, $inputvalue, $truevalue=1, $falsevalue=0, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+		$this->start($label,$inputname,"enable checkbox");
+		$this->core->printEnable($inputname, $inputvalue, $truevalue, $falsevalue, $inputclass, $inputstyle, $pretext, $posttext);
 		$this->end();
 	}
 	
