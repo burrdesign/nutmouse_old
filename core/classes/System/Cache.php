@@ -16,7 +16,7 @@ class Cache {
 	public static $cache_dir = '/core/cache/';
 	
 	public static function loadCache($key,$ttl="no_ttl"){
-		if(Config::get('enable_cache') != "1") return;
+		if(Config::get('enable_cache') != "1") return false;
 		$file = md5($key);
 		$path = $_SERVER['DOCUMENT_ROOT'] . self::$cache_dir . $file;
 		if(is_file($path)){
