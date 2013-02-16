@@ -54,6 +54,7 @@ class Controllers_Frontend_Index extends Controller {
 			$this->view->assign('page_content', $view->loadTemplate());
 		} else {
 			//keinen Content mit diesem Pfad gefunden => 404-Fehler
+			$view->header("HTTP/1.0 404 Not Found");
 			$view->setTemplate("page/error/error404");
 			$view->assign('content', "404-Fehler");
 			
@@ -65,4 +66,5 @@ class Controllers_Frontend_Index extends Controller {
 
 		return $this->view->loadTemplate();
 	}
+	
 }

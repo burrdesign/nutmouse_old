@@ -64,4 +64,7 @@ class View {
 		}
 	}
 	
+	public function header($header){
+		header($header);
+	}
 }

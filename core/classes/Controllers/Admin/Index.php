@@ -82,6 +82,7 @@ class Controllers_Admin_Index extends Controller {
 				$inner_template = 'admin/error/error404';
 				
 				//inneres Modul-Template
+				$view->header("HTTP/1.0 404 Not Found");
 				$view->setTemplate($inner_template);
 				
 				//äußeres Rahmen-Template
