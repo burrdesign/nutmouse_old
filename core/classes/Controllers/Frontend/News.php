@@ -12,12 +12,9 @@
  *		Hauptklasse übergeben
  */
  
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Models/Frontend/Index.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Models/Frontend/News.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
-
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Session.php');
 
 class Controllers_Frontend_News extends Controller {
 
@@ -28,38 +25,36 @@ class Controllers_Frontend_News extends Controller {
 	//Ausgabe generieren und zurückgeben
 	public function display(){
 		$view = new View();
-		
-		//versuchen aus dem Cache zu laden (TTL = 1 Woche)
-		$entry = Cache::loadCache("content:" . $this->request['path'], 60 * 24 * 7);
 	
-		//Inhalt laden
-		if(!$entry && isset($this->request['path'])) $entry = Models_Frontend_Index::getContentByPath($this->request['path']);
-		if(!$entry && isset($this->request['ckey'])) $entry = Models_Frontend_Index::getContentByKey($this->request['ckey']);
+		//Neuigkeit laden
+		$entry = Cache::loadCache("news:" . $this->request['nkey'], 60 * 24 * 7);		
+		if(!$entry && isset($this->request['nkey'])) $entry = Models_Frontend_News::getNewsByKey($this->request['nkey']);
 		
-		if(is_array($entry)){
+		if($entry['newsKey']){
 			//im Cache speichern
-			Cache::saveCache("content:" . $this->request['path'], $entry);
+			Cache::saveCache("news:" . $this->request['nkey'], $entry);
 		
 			//inneres Template
-			$inner_template = 'page/default';
-			if(!empty($entry['versionTemplate'])){
-				$inner_template = $entry['versionTemplate'];
+			$inner_template = 'page/news/detail';
+			if(!empty($entry['newsTemplate'])){
+				$inner_template = $entry['newsTemplate'];
 			}
 			$view->setTemplate($inner_template);
-			$view->assign('content', $entry['versionText']);
+			$view->assign('newsData', $entry);
 			
 			//äußeres Template
 			$this->view->setTemplate('index');
-			$this->view->assign('title', $entry['contentTitle']);
+			$this->view->assign('title', $entry['newsTitle']);
 			$this->view->assign('page_content', $view->loadTemplate());
 		} else {
 			//keinen Content mit diesem Pfad gefunden => 404-Fehler
-			$view->setTemplate("page/error/error404");
+			header('HTTP/1.0 404 Not Found');
+			$view->setTemplate('page/error/error404');
 			$view->assign('content', "404-Fehler");
 			
 			//äußeres Template
 			$this->view->setTemplate('index');
-			$this->view->assign('title', "Seite nicht gefunden");
+			$this->view->assign('title', "Neuigkeit nicht gefunden");
 			$this->view->assign('page_content', $view->loadTemplate());
 		}
 
