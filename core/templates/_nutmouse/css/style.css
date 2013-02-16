@@ -13,8 +13,8 @@ iframe.background { top:70px; }
 .wrap_head { width:100%; background:none #fff; position:fixed; top:0; left:0; z-index:1000; }
 .wrap_head .inner { width:900px; margin-left:-450px; padding-left:50%; position:relative; }
 
-.logo { float:left; }
-.logo h1 { font-weight:normal; text-transform:uppercase; margin:0 20px; padding:0; line-height:70px; font-size:200%; }
+.logo { float:left; background:url(../img/logo.png) transparent no-repeat left center; width:400px; height:70px; }
+.logo h1 { font-weight:normal; text-transform:uppercase; margin:0 20px; padding:0; line-height:70px; font-size:200%; display:none; }
 .logo h1 .bold { font-weight:bold; }
 
 .head_info { float:right; }

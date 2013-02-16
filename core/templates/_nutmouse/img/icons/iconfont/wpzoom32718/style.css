@@ -1,0 +1,71 @@
+@font-face {
+	font-family: 'wpzoom';
+	src:url('fonts/wpzoom.eot');
+	src:url('fonts/wpzoom.eot?#iefix') format('embedded-opentype'),
+		url('fonts/wpzoom.woff') format('woff'),
+		url('fonts/wpzoom.ttf') format('truetype'),
+		url('fonts/wpzoom.svg#wpzoom') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'wpzoom';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"]:before {
+*/
+.icon-phone:before, .icon-envelope:before, .icon-facebook:before, .icon-location:before, .icon-user:before, .icon-user-2:before, .icon-user-3:before, .icon-support:before, .icon-clock:before, .icon-gift:before, .icon-lamp:before, .icon-tag:before {
+	font-family: 'wpzoom';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-phone:before {
+	content: "\e031";
+}
+.icon-envelope:before {
+	content: "\e032";
+}
+.icon-facebook:before {
+	content: "\e033";
+}
+.icon-location:before {
+	content: "\e034";
+}
+.icon-user:before {
+	content: "\e035";
+}
+.icon-user-2:before {
+	content: "\e036";
+}
+.icon-user-3:before {
+	content: "\e037";
+}
+.icon-support:before {
+	content: "\e038";
+}
+.icon-clock:before {
+	content: "\e039";
+}
+.icon-gift:before {
+	content: "\e03a";
+}
+.icon-lamp:before {
+	content: "\e03b";
+}
+.icon-tag:before {
+	content: "\e03c";
+}
