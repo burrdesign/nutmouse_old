@@ -31,6 +31,7 @@ a:hover {
 body.login .wrap_all {
 	width:250px;
 	margin:100px 0 30px -125px;
+	padding:0 0 0 50%;
 }
 
 body.login .wrap_loginmask .loginmask_intro h2 {
