@@ -7,9 +7,9 @@ NutMouse ist ein durch die Firma BurrDesign in Persona mich (Julian Burr) entwor
 - Newsverwaltung => Integration von Blogfunktionen
 - Filesystem => Integration von Bildergaleriefunktionen
 - CRM (Kontaktverwaltung) => Integration von Newsletterfunktionen etc.
-- simples Caching-System zum entlasten der Datenbank
+- simples Caching-System zum Entlasten der Datenbank
 - simples Event- und Plugin-System
 
 und weitere Funktionen.
 
-&copy; 2013 - Julian Burr - BurrDesign - Stand: 15.02.2013
+&copy; 2013 - Julian Burr - BurrDesign - Stand: 22.2.2013
