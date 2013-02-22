@@ -1,0 +1,1 @@
+Hier liegen die Bilder aus den Bildergalerien in der Galerie-Laufnummer entsprechenden Unterverzeichnissen!

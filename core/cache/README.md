@@ -1,0 +1,1 @@
+Hier liegen die Cache-Dateien, die bei aktivierter Cache-Funktion ausgelesen werden, anstatt jedes Mal wieder die Datenbank abzufragen.
