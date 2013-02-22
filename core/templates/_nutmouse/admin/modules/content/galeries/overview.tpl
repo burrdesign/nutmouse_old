@@ -29,7 +29,7 @@
 ?>
 
 <div class="mask_intro">
-	<h2 class="mask_title"><span class="icon icon-tree"></span> Bildergalerien</h2>
+	<h2 class="mask_title"><span class="icon icon-image"></span> Bildergalerien</h2>
 	<p class="mask_desc">Hier k&ouml;nnen Sie Bildergalerien anlegen und verwalten. Diese k&ouml;nnen Sie sowohl mit Bildern, als auch mit erg&auml;nzenden Texten versehen.</p>
 	<?php if($galerycnt > 0) echo "\t<p>Es wurden <b>{$galerycnt}</b> Bildergalerien gefunden.</p>\n"; ?>
 </div>
