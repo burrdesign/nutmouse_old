@@ -13,11 +13,6 @@
  */
  
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Models/Admin/Index.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
-
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Session.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Admin.php');
 
 class Controllers_Admin_Index extends Controller {

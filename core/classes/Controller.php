@@ -12,7 +12,6 @@
  
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Session.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Config.php');
 
 class Controller {
 

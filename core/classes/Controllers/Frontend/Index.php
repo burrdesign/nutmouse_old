@@ -13,11 +13,7 @@
  */
  
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Models/Frontend/Index.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/View.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controller.php');
-
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Session.php');
 
 class Controllers_Frontend_Index extends Controller {
 

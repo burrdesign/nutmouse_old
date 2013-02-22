@@ -10,8 +10,6 @@
  *		Hilfs-Klasse zum Schreiben von Log-Einträgen in die Datenbank
  */
  
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
- 
 class Log {
 
 	public static function writeLog($type, $text){

@@ -11,7 +11,6 @@
  */
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Model.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
 
 class Models_Admin_Index extends Model {
 
