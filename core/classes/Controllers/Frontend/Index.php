@@ -31,7 +31,7 @@ class Controllers_Frontend_Index extends Controller {
 		
 		//versuchen aus dem Cache zu laden (TTL = 1 Woche)
 		if(isset($this->request['path'])) $entry = Cache::loadCache("content:" . $this->request['path'], 60 * 24 * 7);
-	
+		
 		//Inhalt laden
 		if(!$entry && isset($this->request['path'])) $entry = Models_Frontend_Index::getContentByPath($this->request['path']);
 		if(!$entry && isset($this->request['ckey'])) $entry = Models_Frontend_Index::getContentByKey($this->request['ckey']);
