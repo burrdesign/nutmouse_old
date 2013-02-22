@@ -28,6 +28,7 @@ class Config {
 			while($res = mysql_fetch_array($result)){
 				$config[$res['configLabel']] = $res['configValue'];
 			}
+			$_SESSION['BD']['config'] = $config;
 			Cache::saveCache($cachekey,$config);
 		}
 		

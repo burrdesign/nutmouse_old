@@ -16,7 +16,7 @@ class Cache {
 	public static $cache_dir = '/core/cache/';
 	
 	public static function loadCache($key,$ttl="no_ttl"){
-		if(Config::get('enable_cache') != "1") return false;
+		if($_SESSION['BD']['config']['enable_cache'] != "1") return false;
 		$file = md5($key);
 		$path = $_SERVER['DOCUMENT_ROOT'] . self::$cache_dir . $file;
 		if(is_file($path)){
@@ -34,7 +34,7 @@ class Cache {
 	}
 	
 	public static function saveCache($key, $data){
-		if(Config::get('enable_cache') != "1") return;
+		if($_SESSION['BD']['config']['enable_cache'] != "1") return;
 		$file = md5($key);
 		$data = serialize($data);
 		file_put_contents($_SERVER['DOCUMENT_ROOT'] . self::$cache_dir . $file, $data);
