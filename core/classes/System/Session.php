@@ -11,9 +11,6 @@
  *		Hier wäre auch der Ansatzpunkt für Statistik-Hooks
  */
  
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Log.php');
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Config.php');
- 
 class Session {
 
 	public function getSession(){

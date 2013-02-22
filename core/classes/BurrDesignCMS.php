@@ -14,12 +14,12 @@
  *		Verfügung stehen müssen.
  */
  
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Config.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Frontend/Index.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Frontend/News.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Admin/Index.php');
 
 //statische Hilfs-Klassen einbinden
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Config.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Lib.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Log.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Event.php');
