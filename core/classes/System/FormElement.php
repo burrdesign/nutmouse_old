@@ -42,8 +42,12 @@ class FormElement {
 		echo "\t\t{$pretext}<textarea name=\"{$inputname}\" class=\"text {$inputclass}\" id=\"{$inputname}\" style=\"{$inputstyle}\">{$inputvalue}</textarea>{$posttext}\n";
 	}
 	
-	public function printUpload($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
-		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"file\" class=\"file {$inputclass}\" id=\"{$inputname}\" style=\"{$inputstyle}\">{$posttext}\n";
+	public function printUpload($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $multiple=0){
+		$multipletag = "";
+		if($multiple == 1){
+			$multipletag = "multiple=\"multiple\"";
+		}
+		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"file\" class=\"file {$inputclass}\" id=\"{$inputname}\" style=\"{$inputstyle}\" {$multipletag}>{$posttext}\n";
 	}
 	
 	public function printSelect($inputname, $inputvalue, $inputoptions, $inputoptionlabels=array(), $inputclass="", $inputstyle="", $pretext="", $posttext=""){
@@ -60,9 +64,23 @@ class FormElement {
 			if(!empty($inputoptionlabels[$option])){
 				$value = $inputoptionlabels[$option];
 			}
-			echo "\t\t\t<option value=\"{$option}\" val {$selected}>{$value}</option>\n";
+			echo "\t\t\t<option value=\"{$option}\" {$selected}>{$value}</option>\n";
 		}
 		echo "\t\t</select>\n\t\t{$posttext}";
+	}
+	
+	public function printSelectFromQuery($inputname, $inputvalue, $query, $optionsfield, $labelfield, $emptyfield=1, $emptyvalue="&nbsp;", $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+		$inputoptions = array();
+		$inputoptionlabels = array();
+		if($emptyfield == 1){
+			$inputoptions[] = "";
+			$inputoptionlabels[""] = $emptyvalue;
+		}
+		while($option = mysql_fetch_array($query)){
+			$inputoptions[] = $option[$optionsfield];
+			$inputoptionlabels[$option[$optionsfield]] = $option[$labelfield];
+		}
+		$this->printSelect($inputname, $inputvalue, $inputoptions, $inputoptionlabels, $inputclass, $inputstyle, $pretext, $posttext);
 	}
 	
 	public function printEnable($inputname, $inputvalue, $truevalue=1, $falsevalue=0, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
@@ -158,15 +176,21 @@ class FormElementRow {
 		$this->end();
 	}
 	
-	public function printUpload($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+	public function printUpload($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $multiple=0){
 		$this->start($label,$inputname,"text");
-		$this->core->printUpload($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext);
+		$this->core->printUpload($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext, $multiple);
 		$this->end();
 	}
 	
 	public function printSelect($label, $inputname, $inputvalue, $inputoptions, $inputoptionlabels=array(), $inputclass="", $inputstyle="", $pretext="", $posttext=""){
 		$this->start($label,$inputname,"select");
 		$this->core->printSelect($inputname, $inputvalue, $inputoptions, $inputoptionlabels, $inputclass, $inputstyle, $pretext, $posttext);
+		$this->end();
+	}
+	
+	public function printSelectFromQuery($label, $inputname, $inputvalue, $query, $optionsfield, $labelfield, $emptyfield=1, $emptyvalue="&nbsp;", $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+		$this->start($label,$inputname,"select");
+		$this->core->printSelectFromQuery($inputname, $inputvalue, $query, $optionsfield, $labelfield, $emptyfield, $emptyvalue, $inputclass, $inputstyle, $pretext, $posttext);
 		$this->end();
 	}
 	
