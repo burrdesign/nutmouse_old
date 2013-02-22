@@ -1,8 +1,5 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Form.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
-	
+
 	$key = $_REQUEST['editNews'];
 	
 	/*

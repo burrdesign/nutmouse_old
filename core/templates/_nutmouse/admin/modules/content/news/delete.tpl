@@ -1,7 +1,4 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Form.php');
-	include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
 	
 	$key = $_REQUEST['removeNews'];
 	
@@ -16,7 +13,7 @@
 		
 			$sql->delete("bd_main_news",$this->_['post']);
 			
-			//Seitencache löschen
+			//Newscache löschen
 			Cache::clearCache("news:" . $this->_['post']['newsKey']);
 			
 			$messages['ok'] = 'Die Neuigkeit wurde aus der Datenbank entfernt!';
@@ -32,7 +29,7 @@
 	if($messages['error'] || $this->_['post']['do'] != 'removeNews'){
 	 
 		/*
-		 * Seite laden
+		 * Neuigkeit laden
 		 */
 		if((int)$key > 0){
 			$sql->setQuery("
