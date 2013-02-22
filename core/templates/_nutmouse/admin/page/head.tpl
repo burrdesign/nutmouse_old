@@ -9,5 +9,5 @@
 <link rel="stylesheet" href="/core/templates/_nutmouse/admin/img/icons/iconfont/style.css">
 <!--[if lte IE 7]><script type="text/javascript" src="/core/templates/_nutmouse/admin/img/icons/iconfont/lte-ie7.js"></script><![endif]-->
 
-<script type="text/javascript" src="/core/templates/_nutmouse/js/jquery.min.js"></script>
+<script type="text/javascript" src="/core/templates/_nutmouse/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="/core/templates/_nutmouse/admin/js/mainmenu-jquery.js"></script>
