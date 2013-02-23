@@ -43,7 +43,7 @@ class BurrDesignCMS {
 		Event::trigger('BurrDesign_PreConstruct');
 		
 		//angeforderten View ermitteln
-		$this->view = $_REQUEST['view'];
+		$this->view = $this->determineView($_REQUEST['url']);
 		
 		//und Seite ausgeben
 		echo $this->display();
@@ -67,6 +67,11 @@ class BurrDesignCMS {
 				$this->controller = new Controllers_Frontend_News($_GET,$_POST);
 				break;
 				
+			case 'galery':
+				//Neuigkeit im Frontend
+				$this->controller = new Controllers_Frontend_Galery($_GET,$_POST);
+				break;
+				
 			case 'admin':
 				//Adminseite
 				$this->controller = new Controllers_Admin_Index($_GET,$_POST);
@@ -82,6 +87,30 @@ class BurrDesignCMS {
 		
 		if(is_object($this->controller)) $output = $this->controller->display();
 		return $output;
+	}
+	
+	//View anhand der URL ermitteln
+	private function determineView($url){
+		$view = "";
+		$parts = explode('/', $url);
+		if($parts[0] == 'news' || $parts[0] == 'n'){
+			$view = 'news';
+			$_GET['nkey'] = $parts[1];
+		} elseif($parts[0] == 'pics'){
+			$view = 'galery';
+			$_GET['gkey'] = $parts[1];
+		} elseif($parts[0] == 'admin'){
+			$view = 'admin';
+			$adminparts = $parts;
+			unset($adminparts[0]);
+			$adminurl = implode('/', $adminparts);
+			$_GET['path'] = $adminurl;
+		} else {
+			$view = 'content';
+			$_GET['path'] = $url;
+		}
+		
+		return $view;
 	}
 	
 	//Installierte + aktivierte Plugins initialisieren
