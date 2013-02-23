@@ -93,7 +93,7 @@ class BurrDesignCMS {
 			");
 		$query = $sql->execute();
 		while($plugin = mysql_fetch_array($query)){
-			include_once($_SERVER['DOCUMENT_ROOT'] . '/' . $this->pluginpath . '/' . $plugin['pluginName'] . '.php');
+			include_once("{$_SERVER['DOCUMENT_ROOT']}/{$this->pluginpath}/{$plugin['pluginName']}/{$plugin['pluginName']}.php");
 			$initplugin = new $plugin['pluginName']();
 			$initplugin->init();
 		}

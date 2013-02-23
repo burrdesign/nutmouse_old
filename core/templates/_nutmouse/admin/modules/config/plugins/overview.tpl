@@ -18,18 +18,34 @@
 	 */
 	if($this->_['post']['do'] == "uploadPlugin" && !empty($_FILES['file']['name'])){
 		//neue Datei hochladen
-		$filepath = $pluginpath . $_FILES['file']['name'];
-		if(!is_file($filepath)){
-			move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
-			$messages['ok'] = 'Plugin wurde erfolgreich hochgeladen!';
+		if(strpos($_FILES['file']['name'], ".zip") !== false){
+			$pluginname = str_replace(".zip", "", $_FILES['file']['name']);
+			$plugindir = $pluginpath . $pluginname . '/';
+			$filepath = $plugindir . $_FILES['file']['name'];
+			if(!is_dir($plugindir)){
+				mkdir($plugindir); 
+				move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
+				$zip = new ZipArchive();
+				if($zip->open($filepath) === true){
+					$zip->extractTo($plugindir);
+					$zip->close();
+					unlink($filepath);
+					$messages['ok'] = 'Das Plugin wurde erfolgreich hochgeladen und entpackt!';
+				} else {
+					$messages['error'] = 'ZIP-Datei konnte nicht entpackt werden!';
+				}
+			} else {
+				//Datei existiert bereits
+				$messages['error'] = 'Das gew&uuml;nschte Plugin existiert bereits!';
+			}
 		} else {
-			//Datei existiert bereits
-			$messages['error'] = 'Das gew&uuml;nschte Plugin existiert bereits!';
+			$messages['error'] = 'Bitte laden Sie nur ZIP-Dateien hoch!';
 		}
 	} elseif(!empty($this->_['get']['install'])){
 		//Plugin installieren
-		if(is_file($pluginpath . $this->_['get']['install'] . '.php')){
-			include_once($pluginpath . $this->_['get']['install'] . '.php');
+		$installpath = $pluginpath . $this->_['get']['install'] . '/' . $this->_['get']['install'] . '.php';
+		if(is_file($installpath)){
+			include_once($installpath);
 			$plugin = new $this->_['get']['install']();
 			if(method_exists($plugin, 'install')){
 				$plugin->install();
@@ -42,8 +58,9 @@
 		}
 	} elseif(!empty($this->_['get']['uninstall'])){
 		//Plugin deinstallieren
-		if(is_file($pluginpath . $this->_['get']['uninstall'] . '.php')){
-			include_once($pluginpath . $this->_['get']['uninstall'] . '.php');
+		$uninstallpath = $pluginpath . $this->_['get']['uninstall'] . '/' . $this->_['get']['uninstall'] . '.php';
+		if(is_file($uninstallpath)){
+			include_once($uninstallpath);
 			$plugin = new $this->_['get']['uninstall']();
 			if(method_exists($plugin, 'uninstall')){
 				$plugin->uninstall();
@@ -64,9 +81,8 @@
 		$handle = opendir($pluginpath);
 		while($plugin = readdir($handle)){
 			$test = $pluginpath . $plugin;
-			if(is_file($test)){
-				$plugin_clear = str_replace(".php","",$plugin);
-				$pluginlist[] = $plugin_clear;
+			if(is_dir($test) && $plugin != "." && $plugin != ".."){
+				$pluginlist[] = $plugin;
 			}
 		}
 	} else {

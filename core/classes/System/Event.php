@@ -41,7 +41,7 @@ class Event {
 		//Event triggern und dadurch die gebundenen Funktionen auslösen
 		$to_trigger = self::$bound[$event];
 		foreach($to_trigger as $class => $functions){
-			include_once($_SERVER['DOCUMENT_ROOT'] . '/' . self::$plugin_path . '/' . $class . '.php');
+			include_once($_SERVER['DOCUMENT_ROOT'] . '/' . self::$plugin_path . '/' . $class . '/' . $class . '.php');
 			$call = new $class();
 			foreach($functions as $function){
 				$call->$function();

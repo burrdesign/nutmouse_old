@@ -4,13 +4,13 @@
 	
 	/*
 	 * ACTIONPHASE:
-	 * Löschen der Neuigkeit
+	 * Löschen des Plugins
 	 */
 	$sql = new SqlManager();
 	if($this->_['post']['do'] == 'removePlugin'){
 		//Plugin komplett entfernen
-		if(is_file($pluginpath . $this->_['post']['pluginName'] . '.php')){
-			unlink($pluginpath . $this->_['post']['pluginName'] . '.php');
+		if(is_dir($pluginpath . $this->_['post']['pluginName'] . '/')){
+			Lib::recursiveRmdir($pluginpath . $this->_['post']['pluginName'] . '/');
 			$messages['ok'] = 'Das Plugin wurde erfolgreich entfernt!';
 			include($_SERVER['DOCUMENT_ROOT'] . '/core/templates/_nutmouse/admin/modules/config/plugins/overview.tpl');
 		} else {
@@ -24,7 +24,7 @@
 		 * Plugin laden
 		 */
 		if($name != ""){
-			if(!is_file($pluginpath . $name . '.php')){
+			if(!is_dir($pluginpath . $name . '/')){
 				$messages['error'] = 'Plugin konnte nicht gefunden werden!';
 			}
 		} else {

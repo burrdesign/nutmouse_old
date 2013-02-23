@@ -16,7 +16,7 @@
 			
 			//Datei löschen
 			if(is_dir($galerydir)){
-				recursiveRmdir($galerydir);
+				Lib::recursiveRmdir($galerydir);
 				
 				//Datenbankeinträge löschen
 				$sql->setQuery("
@@ -37,26 +37,6 @@
 		} else {
 			$messages['error'] = 'Es ist ein Fehler aufgetreten!';
 		}
-	}
-	
-	function recursiveRmdir($dir){
-		//Hilfsfunktion zu rekursiven Löschen von Verzeichnissen
-		if(!is_dir($dir)){
-			return;
-		}
-		$handle = opendir($dir);
-		while($e = readdir($handle)){
-			if($e != "." && $e != ".."){
-				if(is_file($dir . $e)){
-					unlink($dir . $e);
-				} elseif(is_dir($dir . $e)){
-					//rekursiv Löschen
-					recursiveRmdir($dir . $e);
-				}
-			}
-		}
-		closedir($handle);
-		rmdir($dir);
 	}
 	
 	if($messages['error'] || $this->_['post']['do'] != 'removeGalery'){

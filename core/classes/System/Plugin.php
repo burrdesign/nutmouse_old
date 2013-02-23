@@ -27,6 +27,7 @@ class Plugin {
 		//Plugin in die Datenbank schreiben
 		$this->info['pluginName'] = get_class($this);
 		$this->info['pluginInstalled'] = date("Y-m-d H:i:s", time());
+		$this->info['pluginActive'] = 1;
 		
 		//Plugin in die SQL-Tabelle schreiben
 		$sql = new SqlManager();
