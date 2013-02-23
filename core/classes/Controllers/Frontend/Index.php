@@ -47,6 +47,9 @@ class Controllers_Frontend_Index extends Controller {
 			//äußeres Template
 			$this->view->setTemplate('index');
 			$this->view->assign('title', $entry['contentTitle']);
+			if(Config::get("maintitle")){
+				$this->view->assign('title', $entry['contentTitle'] . " - " . Config::get("maintitle"));
+			}
 			$this->view->assign('page_content', $view->loadTemplate());
 		} else {
 			//keinen Content mit diesem Pfad gefunden => 404-Fehler
@@ -57,6 +60,9 @@ class Controllers_Frontend_Index extends Controller {
 			//äußeres Template
 			$this->view->setTemplate('index');
 			$this->view->assign('title', "Seite nicht gefunden");
+			if(Config::get("maintitle")){
+				$this->view->assign('title', "Seite nicht gefunden - " . Config::get("maintitle"));
+			}
 			$this->view->assign('page_content', $view->loadTemplate());
 		}
 
