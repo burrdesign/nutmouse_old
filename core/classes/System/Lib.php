@@ -23,7 +23,7 @@ class Lib {
 					unlink($dir . $e);
 				} elseif(is_dir($dir . $e)){
 					//rekursiv Löschen
-					recursiveRmdir($dir . $e);
+					self::recursiveRmdir($dir . $e . '/');
 				}
 			}
 		}
