@@ -102,8 +102,9 @@
 		$form->row->printTextfield("Dateiname", "imageFilename", $image['imageFilename'],"","","http://" . $_SERVER['SERVER_NAME'] . "/{$galerydir}/ ");
 		
 		$form->row->printTextfield("Bild-Titel", "imageTitle", $image['imageTitle']);
+
 		$form->row->start("Beschreibung","","nolabel");
-			$form->element->printTextarea("imageDesc",$image['imageDesc'],"","width:99%; height:120px;");
+			$form->element->printTextarea("imageDesc",$image['imageDesc'],"wysiwyg-editor","width:100%; height:120px;");
 		$form->row->end();
 		
 		$form->row->printUpload("Ersetzen durch","imageUpload","","","display:block; margin:3px 0 0 0;");

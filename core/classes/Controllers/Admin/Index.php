@@ -26,6 +26,8 @@ class Controllers_Admin_Index extends Controller {
 		$view = new View();
 		$admin = new Admin();
 	
+		Event::trigger('Controller_Admin_Index_PreDispatch');
+	
 		//Login-Actions
 		$loginmessage = array();
 		if($this->request['path'] == 'logout'){
@@ -58,6 +60,10 @@ class Controllers_Admin_Index extends Controller {
 					$submenu = "";
 				}
 				
+				//Daten aufbereiten
+				$custom_head = Event::trigger('Controller_Admin_Index_CustomHead');
+				$custom_footer = Event::trigger('Controller_Admin_Index_CustomFooter');
+				
 				//inneres Modul-Template
 				$view->setTemplate($inner_template);
 				$view->assign('request', $this->request);
@@ -68,6 +74,8 @@ class Controllers_Admin_Index extends Controller {
 				$this->view->setTemplate($template);
 				$this->view->assign('mainmenu', $mainmenu);
 				$this->view->assign('submenu', $submenu);
+				$this->view->assign('custom_head', $custom_head);
+				$this->view->assign('custom_footer', $custom_footer);
 				$this->view->assign('admin_content', $view->loadTemplate());
 			} else {
 				//kein Admin-Modul mit dem angegeben Pfad gefunden => 404-Fehler
@@ -95,6 +103,8 @@ class Controllers_Admin_Index extends Controller {
 			}
 			$this->view->assign('login_message',$admin->getMessage());
 		}
+		
+		Event::trigger('Controller_Admin_Index_PostDispatch');
 		
 		return $this->view->loadTemplate();
 	}

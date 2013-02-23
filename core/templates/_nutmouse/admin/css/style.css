@@ -286,12 +286,14 @@ body.login .wrap_loginmask .loginmask_form input.submit:hover {
 	float:left;
 }
 
-.mask_form .input_field input.text,
-.mask_form .input_field select,
-.mask_form .input_field textarea {
+.mask_form .input_row input.text,
+.mask_form .input_row select,
+.mask_form .input_row textarea {
 	padding:5px;
 	font-family:"Open Sans","Trebuchet MS",Arial,sans;
 	font-size:100%;
+    box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 
 .mask_form .input_field input.text {

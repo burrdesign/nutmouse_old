@@ -136,11 +136,9 @@
 		$form->row->printTextfield("Seitentitel", "contentTitle", $site['contentTitle'],"","width:200px;");
 		
 		//Seiteninhalts-Feld ohne Label ausgeben
-		echo "
-			\t<div class=\"input_row\" style=\"margin-top:10px;\">\n
-			\t\t<textarea class=\"wysiwyg-editor\" name=\"versionText\" style=\"width:99%; height:250px;\">{$site['versionText']}</textarea>\n
-			\t</div>
-			";
+		$form->row->start("","","nolabel");
+			$form->element->printTextarea("versionText",$site['versionText'],"wysiwyg-editor","width:100%; height:250px;");
+		$form->row->end();
 		
 		$form->row->start();
 			$form->element->printSubmit("Speichern");

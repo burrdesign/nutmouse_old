@@ -121,8 +121,9 @@
 		
 		$form->row->printTextfield("Datum", "galeryDate", $galery['galeryDate'],"","width:200px;");
 		$form->row->printTextfield("Galerie-Titel", "galeryTitle", $galery['galeryTitle'],"","width:200px;");
+
 		$form->row->start("Beschreibung","","nolabel");
-			$form->element->printTextarea("galeryDesc",$galery['galeryDesc'],"","width:99%; height:120px;");
+			$form->element->printTextarea("galeryDesc",$galery['galeryDesc'],"wysiwyg-editor","width:100%; height:120px;");
 		$form->row->end();
 		
 		$form->row->printEnable("Aktiv", "galeryActive", $galery['galeryActive']);

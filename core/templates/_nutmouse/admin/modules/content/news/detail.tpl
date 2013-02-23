@@ -95,7 +95,7 @@
 		$form->row->printTextfield("Veröffentlichen am", "newsReleaseDate", $news['newsReleaseDate'],"datetime");
 		
 		$form->row->start("","","nolabel");
-			$form->element->printTextarea("newsText",$news['newsText'],"wysiwyg-editor","width:99%; height:250px;");
+			$form->element->printTextarea("newsText",$news['newsText'],"wysiwyg-editor","width:100%; height:250px;");
 		$form->row->end();
 		
 		$form->row->start();

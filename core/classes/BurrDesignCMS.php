@@ -86,6 +86,8 @@ class BurrDesignCMS {
 	
 	//Installierte + aktivierte Plugins initialisieren
 	private function initPlugins(){
+		Event::trigger('BurrDesign_InitPlugins_PreInit');
+	
 		$sql = new SqlManager();
 		$sql->setQuery("
 			SELECT pluginName FROM bd_sys_plugin
@@ -97,6 +99,8 @@ class BurrDesignCMS {
 			$initplugin = new $plugin['pluginName']();
 			$initplugin->init();
 		}
+		
+		Event::trigger('BurrDesign_InitPlugins_PostInit');
 	}
 	
 }

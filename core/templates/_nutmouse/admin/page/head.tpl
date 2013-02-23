@@ -1,6 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	
-<title>NutMouse v0.1 Administration</title>
+<title>NutMouse v0.2 Administration</title>
 
 <link rel="stylesheet" href="/core/templates/_nutmouse/admin/css/style.css">
 <link rel="stylesheet" href="/core/templates/_nutmouse/admin/css/1050style.css" media="only screen and (max-width:1050px)" />
@@ -11,3 +11,5 @@
 
 <script type="text/javascript" src="/core/templates/_nutmouse/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="/core/templates/_nutmouse/admin/js/mainmenu-jquery.js"></script>
+
+<?php echo $this->_['custom_head']; ?>

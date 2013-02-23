@@ -44,7 +44,7 @@ class Event {
 			include_once($_SERVER['DOCUMENT_ROOT'] . '/' . self::$plugin_path . '/' . $class . '/' . $class . '.php');
 			$call = new $class();
 			foreach($functions as $function){
-				$call->$function();
+				return $call->$function();
 			}
 		}
 	}
