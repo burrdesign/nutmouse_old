@@ -16,6 +16,7 @@
  
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Frontend/Index.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Frontend/News.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Frontend/Galery.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Controllers/Admin/Index.php');
 
 //statische Hilfs-Klassen einbinden
@@ -91,6 +92,8 @@ class BurrDesignCMS {
 	
 	//View anhand der URL ermitteln
 	private function determineView($url){
+		Event::trigger('BurrDesign_DetermineView_PreInit');
+	
 		$view = "";
 		$parts = explode('/', $url);
 		if($parts[0] == 'news' || $parts[0] == 'n'){
@@ -109,6 +112,8 @@ class BurrDesignCMS {
 			$view = 'content';
 			$_GET['path'] = $url;
 		}
+		
+		Event::trigger('BurrDesign_DetermineView_PostInit');
 		
 		return $view;
 	}

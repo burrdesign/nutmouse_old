@@ -22,6 +22,8 @@ class Controller {
 	protected $view = null;
 
 	public function __construct($get,$post){
+		Event::trigger('Controller_PreConstruct');
+	
 		//Reqeust-Arrays speichern
 		$this->get = $get;
 		$this->post = $post;
@@ -38,6 +40,8 @@ class Controller {
 		if(!empty($this->request['view'])){
 			$this->display = $this->request['view'];
 		}
+		
+		Event::trigger('Controller_PostConstruct');
 	}
 
 }

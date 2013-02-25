@@ -16,6 +16,8 @@ class Models_Frontend_Index extends Model {
 
 	//Inhalt anhand des Pfades laden
 	public static function getContentByPath($path){
+		Event::trigger('Model_Frontend_Index_ContentByPath_PreLoad');
+		
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
 			SELECT * FROM bd_main_content
@@ -26,7 +28,7 @@ class Models_Frontend_Index extends Model {
 		self::$sql->bindParam("{{path}}",$path);
 		self::$entry = self::$sql->result();
 		
-		//Hier findet ggf. noch Nachbereitung statt
+		Event::trigger('Model_Frontend_Index_ContentByPath_PostLoad');
 		
 		if(self::$entry['contentKey']){
 			return self::$entry;
@@ -37,6 +39,8 @@ class Models_Frontend_Index extends Model {
 	
 	//Inhalt anhand des Schlüssels laden
 	public static function getContentByKey($key){
+		Event::trigger('Model_Frontend_Index_ContentByKey_PreLoad');
+		
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
 			SELECT * FROM bd_main_content
@@ -47,7 +51,7 @@ class Models_Frontend_Index extends Model {
 		self::$sql->bindParam("{{key}}",$key);
 		self::$entry = self::$sql->result();
 		
-		//Hier findet ggf. noch Nachbereitung statt
+		Event::trigger('Model_Frontend_Index_ContentByKey_PostLoad');
 		
 		if(self::$entry['contentKey']){
 			return self::$entry;

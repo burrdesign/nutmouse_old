@@ -16,6 +16,8 @@ class Models_Frontend_News extends Model {
 
 	//Neuigkeit anhand des Keys laden
 	public static function getNewsByKey($key){	
+		Event::trigger('Model_Frontend_News_ContentByKey_PreLoad');
+		
 		self::$sql = new SqlManager();
 		self::$sql->setQuery("
 			SELECT * FROM bd_main_news
@@ -38,6 +40,8 @@ class Models_Frontend_News extends Model {
 		$newsData['commentQuery'] = $newsComments;
 		
 		self::$entry = $newsData;
+		
+		Event::trigger('Model_Frontend_News_ContentByKey_PostLoad');
 		
 		if(self::$entry['newsKey']){
 			return self::$entry;

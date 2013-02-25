@@ -24,11 +24,15 @@ class View {
 	private $_ = array();
 	
 	public function __construct(){
+		Event::trigger('View_PreConstruct');
+	
 		//aktuelles Theme laden
 		$this->theme = Config::get("theme");
 		if(!$this->theme){
 			$this->theme = $this->default_theme;
 		}
+		
+		Event::trigger('View_PostConstruct');
 	}
 
 	//Variable für das aktuelle Template zuweisen

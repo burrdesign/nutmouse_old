@@ -25,6 +25,8 @@ class Controllers_Frontend_News extends Controller {
 	//Ausgabe generieren und zurückgeben
 	public function display(){
 		$view = new View();
+		
+		Event::trigger('Controller_Frontend_News_PreDispatch');
 	
 		//Neuigkeit laden
 		$entry = Cache::loadCache("news:" . $this->request['nkey'], 60 * 24 * 7);		
@@ -33,6 +35,10 @@ class Controllers_Frontend_News extends Controller {
 		if($entry['newsKey']){
 			//im Cache speichern
 			Cache::saveCache("news:" . $this->request['nkey'], $entry);
+			
+			//Datenhook
+			$custom_head = Event::trigger('Controller_Frontend_News_CustomHead');
+			$custom_footer = Event::trigger('Controller_Frontend_News_CustomFooter');
 		
 			//inneres Template
 			$inner_template = 'page/news/detail';
@@ -45,6 +51,11 @@ class Controllers_Frontend_News extends Controller {
 			//äußeres Template
 			$this->view->setTemplate('index');
 			$this->view->assign('title', $entry['newsTitle']);
+			if(Config::get("maintitle")){
+				$this->view->assign('title', $entry['newsTitle'] . " - " . Config::get("maintitle"));
+			}
+			$this->view->assign('custom_head', $custom_head);
+			$this->view->assign('custom_footer', $custom_footer);
 			$this->view->assign('page_content', $view->loadTemplate());
 		} else {
 			//keinen Content mit diesem Pfad gefunden => 404-Fehler
@@ -55,8 +66,13 @@ class Controllers_Frontend_News extends Controller {
 			//äußeres Template
 			$this->view->setTemplate('index');
 			$this->view->assign('title', "Neuigkeit nicht gefunden");
+			if(Config::get("maintitle")){
+				$this->view->assign('title', "Neuigkeit nicht gefunden - " . Config::get("maintitle"));
+			}
 			$this->view->assign('page_content', $view->loadTemplate());
 		}
+		
+		Event::trigger('Controller_Frontend_News_PostDispatch');
 
 		return $this->view->loadTemplate();
 	}

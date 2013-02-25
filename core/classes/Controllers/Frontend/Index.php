@@ -25,6 +25,8 @@ class Controllers_Frontend_Index extends Controller {
 	public function display(){
 		$view = new View();
 		
+		Event::trigger('Controller_Frontend_Index_PreDispatch');
+		
 		//versuchen aus dem Cache zu laden (TTL = 1 Woche)
 		if(isset($this->request['path'])) $entry = Cache::loadCache("content:" . $this->request['path'], 60 * 24 * 7);
 		
@@ -35,6 +37,10 @@ class Controllers_Frontend_Index extends Controller {
 		if(is_array($entry)){
 			//im Cache speichern
 			Cache::saveCache("content:" . $this->request['path'], $entry);
+			
+			//Datenhook
+			$custom_head = Event::trigger('Controller_Frontend_Index_CustomHead');
+			$custom_footer = Event::trigger('Controller_Frontend_Index_CustomFooter');
 		
 			//inneres Template
 			$inner_template = 'page/default';
@@ -50,6 +56,8 @@ class Controllers_Frontend_Index extends Controller {
 			if(Config::get("maintitle")){
 				$this->view->assign('title', $entry['contentTitle'] . " - " . Config::get("maintitle"));
 			}
+			$this->view->assign('custom_head', $custom_head);
+			$this->view->assign('custom_footer', $custom_footer);
 			$this->view->assign('page_content', $view->loadTemplate());
 		} else {
 			//keinen Content mit diesem Pfad gefunden => 404-Fehler
@@ -65,6 +73,8 @@ class Controllers_Frontend_Index extends Controller {
 			}
 			$this->view->assign('page_content', $view->loadTemplate());
 		}
+		
+		Event::trigger('Controller_Frontend_Index_PostDispatch');
 
 		return $this->view->loadTemplate();
 	}
