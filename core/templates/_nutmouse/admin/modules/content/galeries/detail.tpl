@@ -20,10 +20,12 @@
 				$key = $sql->getLastInsertID();
 				mkdir($_SERVER['DOCUMENT_ROOT'] . '/' . $galerypath . '/' . $key);
 				$messages['ok'] = 'Bildergalerie erfolgreich angelegt!';
+				Cache::clearCache("galery:" . $key);
 			} else {
 				//vorhandene Galerie updaten
 				$sql->update("bd_main_galery",$this->_['post']);
 				$messages['ok'] = '&Auml;nderungen wurden erfolgreich gespeichert!';
+				Cache::clearCache("galery:" . $key);
 			}
 		} else {
 			$messages['error'] = 'Es ist ein Fehler aufgetreten!';
@@ -55,6 +57,7 @@
 		}
 		if($filecnt > 0){
 			$messages['ok'] = "{$filecnt} Bilder wurden erfolgreich hochgeladen!";
+			Cache::clearCache("galery:" . $key);
 		}
 		
 	}
@@ -67,13 +70,18 @@
 	} elseif($key == "new"){
 		$galery['galeryKey'] = "new";
 	} elseif((int)$key > 0){
-		$sql->setQuery("
-			SELECT * FROM bd_main_galery
-			WHERE galeryKey = {{key}}
-			LIMIT 1
-			");
-		$sql->bindParam("{{key}}",$key,"int");
-		$galery = $sql->result();
+		$galery = Cache::loadCache("galery:" . $key);
+		if(!$galery['galeryKey']){
+			$sql->setQuery("
+				SELECT * FROM bd_main_galery
+				WHERE galeryKey = {{key}}
+				LIMIT 1
+				");
+			$sql->bindParam("{{key}}",$key,"int");
+			$galery = $sql->result();
+			Cache::saveCache("galery:" . $key, $galery);
+		}
+		//Prüfen, ob Galerie geladen werden konnte
 		if(!$galery['galeryKey']){
 			$messages['error'] = 'Bildergalerie konnte nicht gefunden werden!';
 		}
