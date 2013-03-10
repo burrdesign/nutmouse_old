@@ -38,7 +38,26 @@ class Admin {
 			//wurde ein Adminuser gefunden?
 			if($login['adminKey']){
 				$_SESSION['BD']['ADMIN']['login_status'] = 1;
+				$_SESSION['BD']['ADMIN']['user'] = array();
 				$_SESSION['BD']['ADMIN']['user'] = $login;
+				
+				//LastLogin-Datum akualisieren (TODO: funktioniert noch nicht!)
+				$update = array();
+				$update['adminKey'] = $_SESSION['BD']['ADMIN']['user']['adminKey'];
+				$update['adminLastLogin'] = date("Y-m-d H:i:s", time());
+				$sql->update("bd_sys_admin_user", $update);
+				
+				//Benutzerrechte laden
+				$_SESSION['BD']['ADMIN']['user']['rights'] = array();
+				$sql->setQuery("
+					SELECT * FROM bd_sys_admin_right
+					WHERE rightGroupKey = {{group}}"
+					);
+				$sql->bindParam("{{group}}",$_SESSION['BD']['ADMIN']['user']['adminGroupKey'],"int");
+				$rights = $sql->execute();
+				while($right = mysql_fetch_array($rights)){
+					$_SESSION['BD']['ADMIN']['user']['rights'][$right['rightModuleKey']] = $right['rightAccess'];
+				}
 			} else {
 				//Kein Adminuser gefunden
 				$this->message['type'] = 'error';

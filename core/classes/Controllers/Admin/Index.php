@@ -50,6 +50,10 @@ class Controllers_Admin_Index extends Controller {
 				
 				//inneres Template vorbereiten
 				$inner_template = 'admin/modules/' . $entry['moduleCoreFile'];
+				if($_SESSION['BD']['ADMIN']['user']['rights'][$entry['moduleKey']] != 1){
+					//kein Zugriffsrecht!
+					$inner_template = 'admin/error/error401';
+				}
 				
 				//Menüs ermitteln und vorbereiten
 				if($entry['menuParent'] > 0){
