@@ -30,6 +30,7 @@
 							$messages['error'] = "Der Login wird bereits verwendet!";
 						} else {
 							//Neuen Benutzer anlegen
+							$this->_['post']['adminPassword'] = md5($this->_['post']['adminPassword']);
 							$sql->insert("bd_sys_admin_user",$this->_['post']);
 							$key = $sql->getLastInsertID();
 							$messages['ok'] = 'Benutzer erfolgreich angelegt!';
@@ -38,6 +39,7 @@
 				} else {
 					//Prüfen, ob Login verändert wurde
 					if($this->_['post']['adminLogin'] != $this->_['post']['adminLoginOld']){
+						echo "<pre>{$this->_['post']['adminLogin']} != {$this->_['post']['adminLoginOld']}</pre>";
 						$sql->setQuery("
 							SELECT * FROM bd_sys_admin_user
 							WHERE adminLogin = '{{login}}'
@@ -125,6 +127,7 @@
 		$form->start("?editUser={$key}","post");
 		
 		$form->row->printHidden("do","saveUser");
+		$form->row->printHidden("adminLoginOld",$user['adminLogin']);
 		
 		if($key != "new") $form->row->printHidden("adminKey",$user['adminKey'],true,"ID");
 		else $form->row->printHidden("adminKey",$user['adminKey']);
