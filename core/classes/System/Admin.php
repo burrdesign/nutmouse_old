@@ -4,7 +4,7 @@
  * @Nutmouse CMS
  * @Version: 0.2
  * @Copyright: BurrDesign
- * @Date: 2012-02-02
+ * @Date: 2012-03-10
  *
  * @Beschreibung:
  *		Hilfs-Klasse zum Handling von Admin-Sessions
@@ -41,7 +41,7 @@ class Admin {
 				$_SESSION['BD']['ADMIN']['user'] = array();
 				$_SESSION['BD']['ADMIN']['user'] = $login;
 				
-				//LastLogin-Datum akualisieren (TODO: funktioniert noch nicht!)
+				//LastLogin-Datum akualisieren
 				$update = array();
 				$update['adminKey'] = $_SESSION['BD']['ADMIN']['user']['adminKey'];
 				$update['adminLastLogin'] = date("Y-m-d H:i:s", time());
