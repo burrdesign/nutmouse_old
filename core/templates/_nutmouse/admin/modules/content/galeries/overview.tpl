@@ -56,7 +56,7 @@
 				echo "
 					\t<div class=\"list_paging\">\n
 					\t\t<span class=\"title\">Seite:</span>\n";
-				for($i=1; $i<=ceil($menucnt/$winsize); $i++){
+				for($i=1; $i<=ceil($galerycnt/$winsize); $i++){
 					$class = "";
 					if($i == $page + 1){
 						$class = "active";

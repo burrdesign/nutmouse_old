@@ -9,7 +9,7 @@
 	 */
 	$sql = new SqlManager();
 	if($this->_['post']['do'] == 'removeGalery'){
-		//Menü löschen
+		//Galeriebild löschen
 		if($this->_['post']['galeryKey']){
 		
 			$galerydir = $_SERVER['DOCUMENT_ROOT'] . '/' . $galerypath . '/' . $this->_['post']['galeryKey'] . '/';
