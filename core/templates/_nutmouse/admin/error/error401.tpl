@@ -1,0 +1,2 @@
+<h2>Kein Zugriff!</h2>
+<p>Sie haben nicht die notwendigen Zugriffsrechte um diese Funktion verwenden zu k&ouml;nnen. Wenden Sie sich gegebenenfalls an den Systemadministrator f&uuml;r mehr Informationen.</p>
