@@ -135,6 +135,41 @@
 		$form->row->printTextfield("URL-Pfad", "contentPath", $site['contentPath'],"","","http://" . $_SERVER['SERVER_NAME'] . "/ ");
 		$form->row->printTextfield("Seitentitel", "contentTitle", $site['contentTitle'],"","width:200px;");
 		
+		//Templates aus Verzeichnis laden
+		$templatepath = $_SERVER['DOCUMENT_ROOT'] . '/core/templates/';
+		$templatepath_default = $templatepath . '_nutmouse/page/';
+		$templatepath_theme = $templatepath . Config::get("theme") . '/page/';
+		$templates = array();
+		$templates[] = '';
+		
+		//Defaultverzeichnis
+		if(is_dir($templatepath_default)){
+			$handle = opendir($templatepath_default);
+			while($template = readdir($handle)){
+				if(is_file($templatepath_default . $template) && $template != "." && $template != ".."){
+					$tmp = str_replace(".tpl","",$template);
+					if(!in_array($tmp,$templates)){
+						$templates[] = 'page/' . $tmp;
+					}
+				}
+			}
+		}
+		
+		//Themeverzeichnis
+		if(is_dir($templatepath_theme)){
+			$handle = opendir($templatepath_theme);
+			while($template = readdir($handle)){
+				if(is_file($templatepath_theme . $template) && $template != "." && $template != ".."){
+					$tmp = str_replace(".tpl","",$template);
+					if(!in_array('page/' . $tmp,$templates)){
+						$templates[] = 'page/' . $tmp;
+					}
+				}
+			}
+		}
+		
+		$form->row->printSelect("Template", "versionTemplate", $site['versionTemplate'], $templates);
+		
 		//Seiteninhalts-Feld ohne Label ausgeben
 		$form->row->start("","","nolabel");
 			$form->element->printTextarea("versionText",$site['versionText'],"wysiwyg-editor","width:100%; height:250px;");

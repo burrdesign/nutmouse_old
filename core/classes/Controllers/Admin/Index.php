@@ -103,7 +103,7 @@ class Controllers_Admin_Index extends Controller {
 			if($this->request['path'] == "logout"){
 				$this->view->assign('path','/admin/');
 			} else {
-				$this->view->assign('path','/admin/'.$this->request['path']);
+				$this->view->assign('path',$_SERVER['REQUEST_URI']);
 			}
 			$this->view->assign('login_message',$admin->getMessage());
 		}

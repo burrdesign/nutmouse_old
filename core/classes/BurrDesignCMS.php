@@ -27,7 +27,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Event.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
 
 //allgemeine nicht statische Klassen
-include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/MySqlManager.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/Db/SqlManager.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Plugin.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Form.php');
 
