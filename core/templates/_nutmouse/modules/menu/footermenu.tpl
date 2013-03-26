@@ -11,7 +11,11 @@
 	$elements = $sql->execute();
 	
 	while($element = mysql_fetch_array($elements)){
-		echo "\t<li><a href=\"{$element['elementLink']}\">{$element['elementLabel']}</a></li>\n";
+		$target_tag = "";
+		if($element['elementLinkTarget'] != ""){
+			$target_tag = "target=\"{$element['elementLinkTarget']}\"";
+		}
+		echo "\t<li><a href=\"{$element['elementLink']}\" {$target_tag}>{$element['elementLabel']}</a></li>\n";
 	}
 	
 ?>

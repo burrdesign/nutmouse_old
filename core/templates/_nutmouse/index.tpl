@@ -18,9 +18,6 @@
 				<div class="logo">
 					<a href="/"><span class="bold">NutMouse</span> CMS System v0.2</a>
 				</div>
-				<div class="head_nav">
-					<?php include($_SERVER['DOCUMENT_ROOT']."/core/templates/_nutmouse/modules/menu/headmenu.tpl"); ?>
-				</div>
 			</div>
 		</div>
 		
