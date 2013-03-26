@@ -1,0 +1,117 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300,400italic,600italic,700italic);
+
+html, body {
+	margin:0;
+	padding:0;
+	witdh:100%;
+	height:100%;
+	font-size:12px;
+	font-family:"Open Sans","Trebuchet MS",Arial,sans;
+	color:#000;
+}
+
+a {
+	text-decoration:none;
+	color:#1c425f;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+
+h1 {
+	font-size:220%;
+}
+
+h2 {
+	font-size:180%;
+}
+
+h3 {
+	font-size:160%;
+}
+
+
+/* Seitenaufbau */
+
+.forkme {
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.wrap_all {
+	width:800px;
+	margin:30px 0 30px -400px;
+	padding:0 0 0 50%;
+	position:relative;
+}
+
+.wrap_head,
+.wrap_content,
+.wrap_footer {
+	width:100%;
+	float:left;
+}
+
+.wrap_head {
+	margin-bottom:30px;
+	padding-bottom:30px;
+	border-bottom:1px solid #000;
+}
+
+.wrap_content .home_banner {
+	width:100%;
+	float:left;
+	height:220px;
+	background:#000;
+	margin-bottom:30px;
+}
+
+.wrap_footer {
+	margin-top:30px;
+	padding-top:30px;
+	border-top:1px solid #000;
+}
+
+.wrap_footer p {
+	margin:0;
+}
+
+
+/* Logo */
+.logo a {
+	text-decoration:none;
+	color:#000;
+	font-size:180%;
+	font-weight:normal;
+}
+
+.logo a .bold {
+	font-weight:bold;
+}
+
+.logo a:hover {
+	text-decoration:none;
+}
+
+
+/* Footer */
+.footer_nav { 
+	float:right;
+}
+
+.footer_nav ul {
+	padding:0;
+	margin:0;
+	float:right;
+	list-style:none;
+}
+
+.footer_nav ul li {
+	float:left;
+	margin: 0 0 0 15px;
+	padding:0;
+}
+	
+	
