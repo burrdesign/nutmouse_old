@@ -56,6 +56,7 @@ class Controllers_Frontend_Index extends Controller {
 			if(Config::get("maintitle")){
 				$this->view->assign('title', $entry['contentTitle'] . " - " . Config::get("maintitle"));
 			}
+			$this->view->assign('canonical', $_SERVER['SERVER_NAME'] . '/' . $entry['contentPath']);
 			$this->view->assign('custom_head', $custom_head);
 			$this->view->assign('custom_footer', $custom_footer);
 			$this->view->assign('page_content', $view->loadTemplate());

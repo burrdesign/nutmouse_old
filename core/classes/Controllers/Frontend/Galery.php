@@ -54,6 +54,7 @@ class Controllers_Frontend_Galery extends Controller {
 			if(Config::get("maintitle")){
 				$this->view->assign('title', $entry['galeryTitle'] . " - " . Config::get("maintitle"));
 			}
+			$this->view->assign('canonical', $_SERVER['SERVER_NAME'] . Lib::getCanonicalUrl("galery",$entry['galeryKey'],$entry['galeryTitle']));
 			$this->view->assign('custom_head', $custom_head);
 			$this->view->assign('custom_footer', $custom_footer);
 			$this->view->assign('page_content', $view->loadTemplate());
