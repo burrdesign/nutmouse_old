@@ -11,6 +11,12 @@
 		//Menü löschen
 		if($this->_['post']['menuKey']){
 		
+			$sql->setQuery("
+				DELETE FROM bd_main_menu_element
+				WHERE elementMenuKey = {{key}}
+				");
+			$sql->bindParam("{{key}}",$key);
+			$sql->execute();
 			$sql->delete("bd_main_menu",$this->_['post']);
 			
 			//Menücache löschen

@@ -4,11 +4,11 @@
 	
 	/*
 	 * ACTIONPHASE:
-	 * Löschen des Menüselements
+	 * Löschen des Menüelements
 	 */
 	$sql = new SqlManager();
 	if($this->_['post']['do'] == 'removeMenuElement'){
-		//Menü löschen
+		//Menüelement löschen
 		if($this->_['post']['elementKey']){
 		
 			$sql->delete("bd_main_menu_element",$this->_['post']);
@@ -30,7 +30,7 @@
 	if($messages['error'] || $this->_['post']['do'] != 'removeMenuElement'){
 	 
 		/*
-		 * Menü laden
+		 * Menüelement laden
 		 */
 		if((int)$key > 0){
 			$sql->setQuery("
