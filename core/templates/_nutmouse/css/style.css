@@ -5,8 +5,13 @@ html, body {
 	padding:0;
 	witdh:100%;
 	height:100%;
-	font-size:12px;
+	width:100%;
+	float:left;
+}
+
+html, body, input, textarea {
 	font-family:"Open Sans","Trebuchet MS",Arial,sans;
+	font-size:13px;
 	color:#000;
 }
 
@@ -24,11 +29,12 @@ h1 {
 }
 
 h2 {
-	font-size:180%;
+	font-size:170%;
 }
 
 h3 {
-	font-size:160%;
+	font-size:140%;
+	margin:20px 0 5px 0;
 }
 
 
@@ -63,14 +69,12 @@ h3 {
 .wrap_content .home_banner {
 	width:100%;
 	float:left;
-	height:220px;
-	background:#000;
 	margin-bottom:30px;
 }
 
 .wrap_footer {
-	margin-top:30px;
-	padding-top:30px;
+	margin:30px 0 0 0;
+	padding:30px 0;
 	border-top:1px solid #000;
 }
 
@@ -113,5 +117,244 @@ h3 {
 	margin: 0 0 0 15px;
 	padding:0;
 }
+
+
+/* News */
+.wrap_news .news_date,
+.wrap_news .news_commentcnt {
+	float:left;
+	margin:0 25px 0 0;
+}
+
+.wrap_news .news_title {
+	clear:both;
+}
+
+.wrap_news_comments,
+.wrap_newcomment_form {
+	width:100%;
+	float:left;
+	margin:20px 0 0 0;
+}
 	
+.wrap_newcomment_form input.text,
+.wrap_newcomment_form textarea {
+	width:200px;
+	padding:5px;
+	margin:8px 5px 0 0;
+}
 	
+.wrap_newcomment_form input.commentSubject {
+	width:420px;
+	display:block;
+	clear:both;
+}
+
+.wrap_newcomment_form textarea.commentText {
+	width:420px;
+	display:block;
+	clear:both;
+}
+
+.wrap_newcomment_form input.submit {
+	margin:10px 0;
+	padding:2px 4px;
+	display:block;
+}
+
+.wrap_news_comments .wrap_comment {
+	width:100%;
+	float:left;
+	margin:0 0 20px 0;
+}
+
+.wrap_news_comments .wrap_comment .comment_head {
+	font-size:85%;
+}
+
+.wrap_news_comments .wrap_comment .comment_title span.title {
+	font-size:150%;
+}
+
+
+/* Newsliste */
+.wrap_newslist .wrap_newsdetail {
+	clear:both;
+}
+
+.wrap_newslist .wrap_newsdetail .news_time,
+.wrap_newslist .wrap_newsdetail .news_title {
+	float:left;
+}
+
+.wrap_newslist .wrap_newsdetail .news_time {
+	width:80px;
+}
+
+.wrap_newslist .wrap_newsdetail .news_title {
+	font-weight:bold;
+}
+
+.wrap_newslist .date_trenner {
+	width:100%;
+	float:left;
+}
+
+
+/* Galerie */
+.wrap_galery .galery_date,
+.wrap_galery .galery_imagecnt {
+	float:left;
+	margin:0 25px 0 0;
+}
+
+.wrap_galery .galery_title {
+	clear:both;
+}
+
+.wrap_galery_images {
+	width:100%;
+	float:left;
+	margin:20px 0 0 0;
+}
+
+.wrap_galery_images .column,
+.wrap_galery_images .column .wrap_galery_image,
+.wrap_galery_images .column .wrap_galery_image img {
+	width:240px;
+}
+
+.wrap_galery_images .column {
+	float:left;
+	margin:0 20px 0 0;
+}
+
+.wrap_galery_images .column .wrap_galery_image {
+	float:left;
+	margin:0 0 20px 0;
+}
+
+
+/* Galerieliste */
+.wrap_galerylist {
+	width:100%;
+	float:left;
+	margin:20px 0 0 0;
+}
+
+.wrap_galerylist .wrap_galerydetail,
+.wrap_galerylist .wrap_galerydetail .wrap_image,
+.wrap_galerylist .wrap_galerydetail .wrap_image img.vertical,
+.wrap_galerylist .wrap_galerydetail a {
+	width:240px;
+}
+
+.wrap_galerylist .wrap_galerydetail .wrap_image,
+.wrap_galerylist .wrap_galerydetail .wrap_image img.horizontal,
+.wrap_galerylist .wrap_galerydetail a {
+	height:240px;
+}
+
+.wrap_galerylist .wrap_galerydetail {
+	float:left;
+	margin:0 20px 20px 0;
+	position:relative;
+}
+
+.wrap_galerylist .wrap_galerydetail .wrap_image {
+	float:left;
+	overflow:hidden;
+}
+
+.wrap_galerylist .wrap_galerydetail a {
+	position:absolute;
+	z-index:100;
+	top:0;
+	left:0;
+	text-align:center;
+	opacity:0;
+	color:#000;
+	text-decoration:none;
+	background-color:#fff;
+}
+
+.wrap_galerylist .wrap_galerydetail a:hover {
+	opacity:0.9;
+}
+
+.wrap_galerylist .wrap_galerydetail a span {
+	padding:70px 20px;
+	display:block;
+}
+
+.wrap_galerylist .wrap_galerydetail a b {
+	font-weight:bold;
+	font-size:170%;
+}
+
+
+/* Formulare */
+.wrap_form {
+	width:100%;
+	float:left;
+	margin:20px 0 0 0;
+}
+
+.wrap_form .input_label {
+	width:100%;
+	float:left;
+	margin:5px 0 0 0;
+}
+
+.wrap_form .input_field {
+	width:100%;
+	float:left;
+}
+
+.wrap_form input.text,
+.wrap_form select,
+.wrap_form textarea {
+	padding:5px;
+}
+
+.wrap_form input.text,
+.wrap_form textarea {
+	width:400px;
+}
+
+.wrap_form textarea {
+	height:200px;
+}
+
+.wrap_form input.submit {
+	margin:10px 0;
+	padding:2px 4px;
+	display:block;
+}
+
+.wrap_form .msg {
+	float:left;
+	width:100%;
+	margin:10px 0;
+}
+
+.wrap_form .msg p {
+	padding:5px;
+	margin:0;
+	float:left;
+}
+
+.wrap_form .msg_ok p {
+	background-color:#9ACD32;
+	color:#fff;
+}
+
+.wrap_form .msg_error p {
+	background-color:#d00;
+	color:#fff;
+}
+
+.wrap_form input.missing {
+	border:1px solid #d00;
+	background-color:#fee;
+}

@@ -32,6 +32,7 @@ class Models_Frontend_News extends Model {
 		self::$sql->setQuery("
 			SELECT * FROM bd_main_news_comment
 			WHERE commentNewsKey = {{key}}
+			ORDER BY commentDate DESC
 			");
 		self::$sql->bindParam("{{key}}",$key,"int");
 		$newsComments = self::$sql->execute();

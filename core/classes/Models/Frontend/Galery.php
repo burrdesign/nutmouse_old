@@ -36,8 +36,8 @@ class Models_Frontend_Galery extends Model {
 		self::$sql->bindParam("{{key}}",$key,"int");
 		$galeryImages = self::$sql->execute();
 		
-		$newsData['galeryImageCnt'] = mysql_num_rows($galeryImages);
-		$newsData['galeryImageQuery'] = $galeryImages;
+		$galeryData['galeryImageCnt'] = mysql_num_rows($galeryImages);
+		$galeryData['galeryImageQuery'] = $galeryImages;
 		
 		self::$entry = $galeryData;
 		
