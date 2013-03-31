@@ -32,7 +32,7 @@
 		
 			echo "<div class=\"wrap_galerydetail\">\n";
 			echo "\t<div class=\"wrap_image\"><img class=\"{$imageclass}\" alt=\"{$galery['imageFilename']}\" src=\"/core/files/galeries/{$galery['galeryKey']}/{$galery['imageFilename']}\"></div>\n";
-			echo "\t<a href=\"" . Lib::getCanonicalUrl("galery",$galery['galeryKey'],$galery['galeryTitle']) . "\" class=\"absolute\"><span>" . DateLib::fmt("l, d. F Y", strtotime($this->_['galeryData']['galeryDate'])) . "<br><b>{$galery['galeryTitle']}</b></span></a>\n";
+			echo "\t<a href=\"" . Lib::getCanonicalUrl("galery",$galery['galeryKey'],$galery['galeryTitle']) . "\" class=\"absolute\"><span>" . DateLib::fmt("l, d. F Y", strtotime($galery['galeryDate'])) . "<br><b>{$galery['galeryTitle']}</b></span></a>\n";
 			echo "</div>\n\n";
 		}
 	?>
