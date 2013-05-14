@@ -4,12 +4,36 @@
  * @Nutmouse CMS
  * @Version: 0.2
  * @Copyright: BurrDesign
- * @Date: 2012-02-23
+ * @Date: 2012-03-31
  *
  * @Beschreibung: Hauptbibliothek von kleineren Hilfsfunktionen
  */
  
 class Lib {
+
+	public static function recursiveReadDir($dir, $exclude=array()){
+		//Liest ein Verzeichnis rekursiv aus und gibt alle Dateien und Verzeichnisse als Array zurück
+		//Optional kann ein Array mit Excludes übergeben werden, die nicht mit gelesen werden sollen
+		$return = array();
+		if(!is_dir($dir)){
+			return $return;
+		}
+		$handle = opendir($dir);
+		while($f = readdir($handle)){
+			if($f != "." && $f != ".." && !in_array($dir . $f, $exclude)){
+				if(is_file($dir . $f)){
+					$return[] = $dir . $f;
+				} elseif(is_dir($dir . $f)){
+					$return[] = $dir . $f;
+					$return_sub = array();
+					$return_sub = self::recursiveReadDir($dir . $f . "/", $exclude);
+					$return = array_merge($return, $return_sub);
+				}
+			}
+		}
+		closedir($handle);
+		return $return;
+	}
 
 	public static function recursiveRmdir($dir){
 		//Hilfsfunktion zum rekursiven Löschen von Verzeichnissen
@@ -27,7 +51,6 @@ class Lib {
 				}
 			}
 		}
-		closedir($handle);
 		rmdir($dir);
 	}
 	
