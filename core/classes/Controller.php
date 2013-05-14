@@ -32,6 +32,8 @@ class Controller {
 		//Session laden und ggf. initialisieren
 		$this->session = new Session($get,$post);
 		$this->session->getSession();
+		
+		Stats::callUrl($_REQUEST['url'], $_SESSION);
 	
 		//Äußerer View
 		$this->view = new View();
