@@ -88,7 +88,7 @@
 		$sql->bindParam("{{key}}",$key,"int");
 		$group = $sql->result();
 		
-		//Prüfen, ob Galerie geladen werden konnte
+		//Prüfen, ob Benutzergruppe geladen werden konnte
 		if(!$group['groupKey']){
 			$messages['error'] = 'Benutzergruppe konnte nicht gefunden werden!';
 		}
@@ -170,58 +170,3 @@
 	?>
 	
 </div>
-
-
-<?php
-	if($key != "new"){
-?>
-
-<div class="mask_intro" style="margin-top:30px; width:100%; float:left;">
-	<h2 class="mask_title">
-		<span class="icon icon-user"> Benutzer dieser Gruppe</span>
-	</h2>
-</div>
-
-<div class="mask_table">
-
-<?php
-	//Bilder laden
-	$sql->setQuery("
-		SELECT * FROM bd_sys_admin_user
-		WHERE adminGroupKey = {{key}}
-		ORDER BY adminLogin
-		");
-	$sql->bindParam("{{key}}",$key,"int");
-	$users = $sql->execute();
-	
-	//Elemente ausgeben
-	if(mysql_num_rows($users) == 0){
-		echo "<p><i>Es wurden keine Benutzer in dieser Gruppe gefunden!</i></p>\n";
-	} else {
-		echo "\t<table class=\"list list_menus\" cellpadding=0 cellspacing=0>\n";
-		while($user = mysql_fetch_array($users)){
-			echo "
-				\t\t<tr class=\"\">\n
-				\t\t\t<td class=\"key first width_30 align_center\">{$user['adminKey']}</td>\n
-				\t\t\t<td class=\"login\">{$user['adminLogin']}</td>\n
-				\t\t\t<td class=\"name width_200 font_small hide_650 align_left\">{$user['adminName']} {$user['adminLastName']}</td>\n
-				\t\t\t<td class=\"lastlogin width_120 font_small hide_1050 align_center\">" . date("D, j. M Y", strtotime($user['adminLastLogin'])) . "</td>\n
-				\t\t\t<td class=\"action\"><a href=\"?editUser={$user['adminKey']}\" class=\"icon icon-pencil\" title=\"Bild bearbeiten\"></a></td>\n
-				\t\t\t<td class=\"action\"><a href=\"?removeUser={$user['adminKey']}\" class=\"icon icon-cancel-circle\" title=\"Bild l&ouml;schen\"></a></td>\n
-				\t\t</tr>\n";
-		}
-		echo "\t</table>\n";
-	}
-		
-	//Neuen Benutzer hochladen
-	$form = new Form();
-	$form->element->printSubmitLink("Neuen Benutzer anlegen","?editUser=new&userGroup={$key}");
-
-?>
-	
-</div>
-
-<?php
-	} //endif
-?>
-

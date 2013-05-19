@@ -8,7 +8,7 @@
 	 */
 	$sql = new SqlManager();
 	if($this->_['post']['do'] == 'removeUserGroup'){
-		//Menü löschen
+		//Benutzergruppe löschen
 		if($this->_['post']['groupKey']){
 			//Prüfen, ob die Gruppe auch keine Benutzer mehr enthält
 			$sql->setQuery("
@@ -35,7 +35,7 @@
 	if($messages['error'] || $this->_['post']['do'] != 'removeUserGroup'){
 	 
 		/*
-		 * Benutzer laden
+		 * Benutzergruppe laden
 		 */
 		if((int)$key > 0){
 			$sql->setQuery("

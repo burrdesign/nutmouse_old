@@ -8,7 +8,7 @@
 	 */
 	$sql = new SqlManager();
 	if($this->_['post']['do'] == 'removeUser'){
-		//Menü löschen
+		//Benutzer löschen
 		if($this->_['post']['adminKey']){
 			//prüfen, ob es sich um den angemeldeten User handelt
 			if($this->_['post']['adminKey'] == $_SESSION['BD']['ADMIN']['user']['adminKey']){
@@ -17,9 +17,8 @@
 				$sql->delete("bd_sys_admin_user",$this->_['post']);
 				$messages['ok'] = 'Der Benutzer wurde erfolgreich gel&ouml;scht!';
 				
-				//Gruppe ausgeben
-				$_REQUEST['editUserGroup'] = $this->_['post']['adminGroupKey'];
-				include($_SERVER['DOCUMENT_ROOT'] . '/core/templates/_nutmouse/admin/modules/config/users/group_detail.tpl');
+				//Übersicht ausgeben
+				include($_SERVER['DOCUMENT_ROOT'] . '/core/templates/_nutmouse/admin/modules/config/users/overview.tpl');
 			}
 		} else {
 			$messages['error'] = 'Es ist ein Fehler aufgetreten!';

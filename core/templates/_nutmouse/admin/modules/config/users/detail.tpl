@@ -39,7 +39,6 @@
 				} else {
 					//Prüfen, ob Login verändert wurde
 					if($this->_['post']['adminLogin'] != $this->_['post']['adminLoginOld']){
-						echo "<pre>{$this->_['post']['adminLogin']} != {$this->_['post']['adminLoginOld']}</pre>";
 						$sql->setQuery("
 							SELECT * FROM bd_sys_admin_user
 							WHERE adminLogin = '{{login}}'
@@ -51,7 +50,7 @@
 						}
 					}
 					if(!$messages['error']){
-						//vorhandene Benutzergruppe updaten
+						//vorhandenen Benutzer updaten
 						if(!empty($this->_['post']['adminPassword'])){
 							$this->_['post']['adminPassword'] = md5($this->_['post']['adminPassword']);
 						} else {
@@ -69,7 +68,7 @@
 	}
 	 
 	/*
-	 * Benutzergruppe laden
+	 * Benutzer laden
 	 */
 	if($messages['error']){
 		$user = $this->_['post'];
@@ -85,7 +84,7 @@
 		$sql->bindParam("{{key}}",$key,"int");
 		$user = $sql->result();
 		
-		//Prüfen, ob Galerie geladen werden konnte
+		//Prüfen, ob Benutzer geladen werden konnte
 		if(!$user['adminKey']){
 			$messages['error'] = 'Benutzer konnte nicht gefunden werden!';
 		}
@@ -133,7 +132,8 @@
 		else $form->row->printHidden("adminKey",$user['adminKey']);
 		
 		$form->row->printTextfield("Login", "adminLogin", $user['adminLogin'],"","width:200px;");
-		$form->row->printTextfield("Passwort &auml;ndern", "adminPassword", "","","width:200px;");
+		if($key != "new") $form->row->printTextfield("Passwort &auml;ndern", "adminPassword", "","","width:200px;");
+		else $form->row->printTextfield("Passwort", "adminPassword", "","","width:200px;");
 		
 		//verfügbare Benutzergruppen ermitteln für SELECT-Auswahl
 		$sql = new SqlManager();
@@ -142,13 +142,15 @@
 		
 		$form->row->printSelectFromQuery("Benutzergruppe", "adminGroupKey", $user['adminGroupKey'], $groups, "groupKey", "groupName", false);
 		
+		if($user['adminLastLogin']) $form->row->printInfo("Letzter Login", date("D, j. M Y", strtotime($user['adminLastLogin'])));
+		
 		$form->row->printTextfield("Name", "adminName", $user['adminName'],"","width:200px;");
 		$form->row->printTextfield("Nachname", "adminLastName", $user['adminLastName'],"","width:200px;");
 
 		$form->row->start();
 			$form->element->printSubmit("Speichern");
 			if($key != "new") $form->element->printSubmitLink("<span class=\"icon icon-remove\"></span> Löschen","?removeUser=" . $key, "", "", "margin-right:30px;");
-			$form->element->printSubmitLink("Zur&uuml;ck zur Gruppen&uuml;bersicht","?editUserGroup={$user['adminGroupKey']}");
+			$form->element->printSubmitLink("Zur&uuml;ck zur &Uuml;bersicht","?page=1");
 		$form->row->end();
 		
 		$form->end();
