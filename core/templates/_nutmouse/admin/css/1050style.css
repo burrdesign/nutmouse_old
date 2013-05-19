@@ -34,3 +34,11 @@
 .mask_table table tr td.hide_1050 {
 	display:none;
 }
+
+.mask_left {
+	width:50%;
+}
+
+.mask_right {
+	width:45%;
+}

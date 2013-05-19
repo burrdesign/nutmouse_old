@@ -65,3 +65,18 @@
 .mask_table table.filetree tr td.path {
 	width:auto;
 }
+
+.mask_left {
+	float:left;
+	width:100%;
+	margin:0;
+}
+
+.mask_right {
+	float:left;
+	width:100%;
+}
+
+.mask_inner_table table.list_addresses {
+	width:100%;
+}
