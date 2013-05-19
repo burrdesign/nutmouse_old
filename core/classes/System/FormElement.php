@@ -34,8 +34,8 @@ class FormElement {
 		echo "\t\t<span class=\"info\">{$inputvalue}</span>\n";
 	}
 
-	public function printTextfield($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
-		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"text\" class=\"text {$inputclass}\" value=\"{$inputvalue}\" id=\"{$inputname}\" style=\"{$inputstyle}\">{$posttext}\n";
+	public function printTextfield($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $placeholder=""){
+		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"text\" class=\"text {$inputclass}\" value=\"{$inputvalue}\" id=\"{$inputname}\" style=\"{$inputstyle}\" placeholder=\"{$placeholder}\">{$posttext}\n";
 	}
 	
 	public function printTextarea($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
@@ -164,9 +164,9 @@ class FormElementRow {
 		$this->end();
 	}
 
-	public function printTextfield($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
+	public function printTextfield($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $placeholder=""){
 		$this->start($label,$inputname,"text");
-		$this->core->printTextfield($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext);
+		$this->core->printTextfield($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext, $placeholder);
 		$this->end();
 	}
 	
