@@ -220,4 +220,37 @@ class SqlManager {
 		return $info;
 	}
 	
+	public function executeSqlFile($filepath){
+		//(mehrere) SQL-Anweisung(en) aus einer SQL-Datei ausführen (bspw. aus einem Dump)
+		if(!is_file($filepath)){
+			return;
+		}
+		$queries = $this->getQueriesFromFile($filepath);
+		//Queries ausführen
+		foreach($queries as $q){
+			$this->setQuery($q);
+			$this->execute();
+		}
+	}
+	
+	public function getQueriesFromFile($filepath){
+		//SQL-Anweisungen aus SQL-Datei auslesen und einzeln getrennt als Array zurückgeben
+		if(!is_file($filepath)){
+			return;
+		}
+		$queries = array();
+		$handle = fopen($filepath, 'rb');
+		while (!feof($handle)) {
+			$queries[] = stream_get_line($handle, 1000000, ";\n");
+		}
+		return $queries;
+	}
+
+	public function escape($string, $type="string"){
+		if($type == "int"){
+			return (int)$string;
+		}
+		return mysql_real_escape_string($string);
+	}
+	
 }

@@ -101,5 +101,10 @@ class Lib {
 		}
 		return $url;
 	}
+	
+	public static function writeDbConfigFile($host, $user, $pwd, $db){
+		$configcontent = "<?php\n\n\$HOST={$host};\r\n\$USER={$user};\r\n\$PWD={$pwd};\r\n\$DB={$db};";
+		file_put_contents($configfile, $configcontent);
+	}
 
 }
