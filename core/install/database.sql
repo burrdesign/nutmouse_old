@@ -688,6 +688,15 @@ CREATE TABLE IF NOT EXISTS `bd_sys_plugin` (
 -- --------------------------------------------------------
 
 --
+-- Daten für Tabelle `bd_sys_config`
+--
+
+INSERT INTO `bd_sys_config` (`configKey`, `configLabel`, `configValue`, `configType`, `configNote`) VALUES
+(1, 'maintitle', 'Testseite', 'string', NULL),
+(2, 'theme', '', 'string', NULL),
+(3, 'enable_cache', '0', 'int', NULL);
+
+--
 -- Daten für Tabelle `bd_sys_admin_group`
 --
 

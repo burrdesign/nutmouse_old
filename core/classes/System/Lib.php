@@ -106,5 +106,23 @@ class Lib {
 		$configcontent = "<?php\n\n\$HOST={$host};\r\n\$USER={$user};\r\n\$PWD={$pwd};\r\n\$DB={$db};";
 		file_put_contents($configfile, $configcontent);
 	}
+	
+	public static function checkAdminModuleRight($module){
+		$key = "";
+		if(!is_string($module)){
+			$key = $module;
+		} else {
+			$sql = new SqlManager();
+			$sql->setQuery("
+				SELECT * FROM bd_sys_admin_module
+				WHERE moduleCoreFile = '{{path}}' AND modulePlugin = 0
+				LIMIT 1
+				");
+			$sql->bindParam("{{path}}",$module);
+			$mod = $sql->result();
+			$key = $mod['moduleKey'];
+		}
+		return $_SESSION['BD']['ADMIN']['user']['rights'][$key];
+	}
 
 }

@@ -38,6 +38,26 @@ class FormElement {
 		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"text\" class=\"text {$inputclass}\" value=\"{$inputvalue}\" id=\"{$inputname}\" style=\"{$inputstyle}\" placeholder=\"{$placeholder}\">{$posttext}\n";
 	}
 	
+	public function printEmailfield($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $placeholder=""){
+		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"text\" class=\"text text_email {$inputclass}\" value=\"{$inputvalue}\" id=\"{$inputname}\" style=\"{$inputstyle}\" placeholder=\"{$placeholder}\">";
+		if(!empty($inputvalue)){
+			$this->printSubmitLink("<span class='icon icon-envelop'></span>", "mailto:{$inputvalue}", "", "input_action_icon input_action_icon_email", "float:left; margin:0 5px;");
+		}
+		echo "{$posttext}\n";
+	}
+	
+	public function printWebsitefield($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $placeholder=""){
+		echo "\t\t{$pretext}<input name=\"{$inputname}\" type=\"text\" class=\"text text_website {$inputclass}\" value=\"{$inputvalue}\" id=\"{$inputname}\" style=\"{$inputstyle}\" placeholder=\"{$placeholder}\">";
+		if(!empty($inputvalue)){
+			$href = $inputvalue;
+			if(strpos($href, "http://") != 0 || strpos($href, "http://") === false){
+				$href = "http://" . $href;
+			}
+			$this->printSubmitLink("<span class='icon icon-earth'></span>", $href, "_blank", "input_action_icon input_action_icon_website", "float:left; margin:0 5px;");
+		}
+		echo "{$posttext}\n";
+	}
+	
 	public function printTextarea($inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext=""){
 		echo "\t\t{$pretext}<textarea name=\"{$inputname}\" class=\"text {$inputclass}\" id=\"{$inputname}\" style=\"{$inputstyle}\">{$inputvalue}</textarea>{$posttext}\n";
 	}
@@ -167,6 +187,18 @@ class FormElementRow {
 	public function printTextfield($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $placeholder=""){
 		$this->start($label,$inputname,"text");
 		$this->core->printTextfield($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext, $placeholder);
+		$this->end();
+	}
+	
+	public function printEmailfield($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $placeholder=""){
+		$this->start($label,$inputname,"text");
+		$this->core->printEmailfield($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext, $placeholder);
+		$this->end();
+	}
+	
+	public function printWebsitefield($label, $inputname, $inputvalue, $inputclass="", $inputstyle="", $pretext="", $posttext="", $placeholder=""){
+		$this->start($label,$inputname,"text");
+		$this->core->printWebsitefield($inputname, $inputvalue, $inputclass, $inputstyle, $pretext, $posttext, $placeholder);
 		$this->end();
 	}
 	

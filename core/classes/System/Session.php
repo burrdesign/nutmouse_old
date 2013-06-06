@@ -31,6 +31,9 @@ class Session {
 		if($_SESSION['BD']['session']){
 			return;
 		}
+		
+		//Zur Sicherheit Session-ID neu generieren
+		session_regenerate_id();
 	
 		//Session-Initialisierung
 		$_SESSION['BD']['session'] = session_id();
