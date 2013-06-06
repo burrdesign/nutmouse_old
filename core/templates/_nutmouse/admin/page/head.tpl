@@ -12,4 +12,7 @@
 <script type="text/javascript" src="/core/templates/_nutmouse/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="/core/templates/_nutmouse/admin/js/mainmenu-jquery.js"></script>
 
+<script src="/core/templates/_nutmouse/admin/js/highcharts/highcharts.js"></script>
+<script src="/core/templates/_nutmouse/admin/js/highcharts/themes/nutmouse.js"></script>
+
 <?php echo $this->_['custom_head']; ?>

@@ -288,15 +288,31 @@ body.login .wrap_loginmask .loginmask_form input.submit:hover {
 .mask_form .input_row input.text,
 .mask_form .input_row select,
 .mask_form .input_row textarea {
+	height:30px;
 	padding:5px;
 	font-family:"Open Sans","Trebuchet MS",Arial,sans;
-	font-size:100%;
-    box-sizing: border-box;
-	-moz-box-sizing: border-box;
+	font-size:110%;
+    box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	margin:0;
 }
 
 .mask_form .input_field input.text {
 	width:180px;
+}
+
+.mask_form .input_field input.text_email,
+.mask_form .input_field input.text_website,
+.mask_form .input_field input.text_calender {
+	float:left;
+}
+
+.mask_form .input_field a.input_action_icon:hover {
+	color:#000;
+}
+
+.mask_form .input_field a.input_action_icon_email:hover {
 }
 
 .mask_form .input_field input.radio {
@@ -328,7 +344,7 @@ input.submit,
 a.submit {
 	display:block;
 	float:left;
-	padding:4px 10px;
+	padding:0 10px;
 	border:1px solid #ccc;
 	background:none #eee;
 	color:#333;
@@ -342,7 +358,12 @@ a.submit {
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	-ms-box-sizing: border-box;
-	line-height:20px;
+	line-height:30px;
+	height:30px;
+}
+
+input.submit::-moz-focus-inner {
+	border:0;
 }
 
 input.submit:hover,
@@ -593,7 +614,13 @@ a.submit:hover {
 	font-family:"Open Sans","Trebuchet MS",Arial,sans;
 	float:left;
 	margin:0 5px 0 0;
-	padding:5px;
+	padding:0 5px;
+	line-height:30px;
+	height:30px;
+	font-size:110%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing: border-box;
 }
 
 .mask_search input.search_keywords {
@@ -606,4 +633,33 @@ a.submit:hover {
 
 .mask_inner_table table.list_addresses {
 	width:300px;
+}
+
+.mask_inner_table p {
+	margin:6px 0;
+}
+
+.wrap_diagramm {
+	float:left;
+	background:none #eee;
+	margin:10px 0 0 0;
+}
+
+.wrap_diagramm_box_full {
+	width:100%;
+}
+
+.wrap_diagramm_box_half {
+	width:50%;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.wrap_diagramm_box_half_left {
+	border-right:5px solid #fff;
+}
+
+.wrap_diagramm_box_half_right {
+	border-left:5px solid #fff;
 }
