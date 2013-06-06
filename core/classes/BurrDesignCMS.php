@@ -26,6 +26,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Log.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Event.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Cache.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/DateLib.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Mail.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Backup.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/core/classes/System/Stats.php');
 
