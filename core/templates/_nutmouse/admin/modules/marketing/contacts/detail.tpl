@@ -33,6 +33,16 @@
 					$this->_['post']['contactLastChanged'] = date("Y-m-d H:i:s", time());
 					$sql->insert("bd_main_contact",$this->_['post']);
 					$key = $sql->getLastInsertID();
+					
+					//Newsletterabos speichern
+					foreach($this->_['post'] as $k => $v){
+						if($v == 1 && strpos($k, "newsletterTheme") == 0 && strpos($k, "newsletterTheme") !== false){
+							$insert['toNewsletterThemeKey'] = (int)str_replace("newsletterTheme","",$k);
+							$insert['toContactKey'] = (int)$key;
+							$sql->insert("bd_main_newsletter_to_contact", $insert);
+						}
+					}
+					
 					$messages['ok'] = 'Kontakt erfolgreich angelegt!';
 				}
 			} else {
@@ -58,6 +68,22 @@
 					$this->_['post']['contactLastChanged'] = date("Y-m-d H:i:s", time());
 					$sql->update("bd_main_contact",$this->_['post']);
 					$messages['ok'] = '&Auml;nderungen wurden erfolgreich gespeichert!';
+					
+					//Newsletterabos löschen + neu speichern
+					$sql->setQuery("
+						DELETE FROM bd_main_newsletter_to_contact
+						WHERE toContactKey = {{key}}
+						");
+					$sql->bindParam("{{key}}", $this->_['post']['contactKey']);
+					$sql->execute();
+					
+					foreach($this->_['post'] as $k => $v){
+						if($v == 1 && strpos($k, "newsletterTheme") == 0 && strpos($k, "newsletterTheme") !== false){
+							$insert['toNewsletterThemeKey'] = (int)str_replace("newsletterTheme","",$k);
+							$insert['toContactKey'] = (int)$this->_['post']['contactKey'];
+							$sql->insert("bd_main_newsletter_to_contact", $insert);
+						}
+					}
 				}
 			}
 		} else {
@@ -142,8 +168,8 @@
 			$form->row->printSelectFromQuery("Kontaktgruppe", "contactGroupKey", $contact['contactGroupKey'], $groups, "groupKey", "groupName", true);
 		}
 		
-		$form->row->printTextfield("Email", "contactEmail", $contact['contactEmail'],"","width:200px;");
-		$form->row->printTextfield("Website", "contactWebsite", $contact['contactWebsite'],"","width:200px;");
+		$form->row->printEmailfield("Email", "contactEmail", $contact['contactEmail'],"","width:200px;");
+		$form->row->printWebsitefield("Website", "contactWebsite", $contact['contactWebsite'],"","width:200px;");
 		
 		if($key != "new"){
 			//verknüpfte Adressen ausgeben
@@ -185,6 +211,29 @@
 			$form->row->end();
 			
 			//TODO: Newsletter-Themen ausgeben
+			if(Lib::checkAdminModuleRight("marketing/newsletter")){
+				$sql->setQuery("SELECT * FROM bd_main_newsletter_theme");
+				$themes = $sql->execute();
+				if(mysql_num_rows($themes) > 0){
+					$form->row->start("Newsletter-Themen");
+					while($theme = mysql_fetch_array($themes)){
+						$sql->setQuery("
+							SELECT * FROM bd_main_newsletter_to_contact
+							WHERE toNewsletterThemeKey = {{theme}} AND toContactKey = {{contact}}
+							LIMIT 1
+							");
+						$sql->bindParam("{{theme}}",$theme['themeKey'],"int");
+						$sql->bindParam("{{contact}}",$key,"int");
+						$test = $sql->result();
+						$abo = 0;
+						if($test['toContactKey'] == $key){
+							$abo = 1;
+						}
+						$form->element->printEnable("newsletterTheme" . $theme['themeKey'], $abo, 1, 0, "", "", "<div style=\"clear:both;\">", "<span style=\"float:left; margin:5px 0 0 5px;\">{$theme['themeName']}</span></div>");
+					}
+					$form->row->end();
+				}
+			}
 		}
 		
 		$form->row->printTextfield("Login", "contactLogin", $contact['contactLogin'],"","width:200px;");

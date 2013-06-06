@@ -17,8 +17,11 @@
 				$sql->insert("bd_main_contact_address",$this->_['post']);
 				$key = $sql->getLastInsertID();
 				$messages['ok'] = 'Adresse erfolgreich angelegt!';
+				
+				//Newsletterabos speichern
+				...
 			} else {
-				//vorhandene Kontaktgruppe updaten
+				//vorhandene Adresse updaten
 				$sql->update("bd_main_contact_address",$this->_['post']);
 				$messages['ok'] = '&Auml;nderungen wurden erfolgreich gespeichert!';
 			}
@@ -97,8 +100,10 @@
 		
 		$form->row->printHidden("do","saveContactAddress");
 		
-		$form->row->printHidden("addressKey",$key);
 		$form->row->printHidden("addressContactKey",$address['addressContactKey']);
+		
+		if($key != "new") $form->row->printHidden("addressKey",$address['addressKey'],true,"ID");
+		else $form->row->printHidden("addressKey",$address['addressKey']);
 		
 		$form->row->printSelect("Anrede", "addressGender", $address['addressGender'], array("m","f"), array("m"=>"Herr","f"=>"Frau"));
 		$form->row->printTextfield("Name", "addressName", $address['addressName'],"","width:200px;");
